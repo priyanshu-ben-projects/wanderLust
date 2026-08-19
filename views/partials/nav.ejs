@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg bnb-navbar">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand bnb-brand" href="/listings">
+            <i class="bi bi-compass"></i>
+            <span>WanderLust</span>
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- Navigation -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link bnb-link active" href="/listings">
+                        Explore
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link bnb-link" href="/listings/create">
+                        Create Listing
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Search -->
+            <form class="bnb-search d-flex" action="/listings" method="GET">
+
+                <i class="bi bi-search"></i>
+
+                <input type="search" name="search" placeholder="Search destinations" aria-label="Search">
+
+            </form>
+
+        </div>
+    </div>
+</nav>

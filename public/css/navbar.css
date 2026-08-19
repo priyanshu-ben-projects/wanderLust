@@ -1,0 +1,155 @@
+.bnb-navbar {
+    background: #ffffff;
+    min-height: 72px;
+    padding: 12px 0;
+
+    border-bottom: 1px solid #eeeeee;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.bnb-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #222222 !important;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    text-decoration: none;
+}
+
+.bnb-brand:hover {
+    color: #222222 !important;
+}
+
+.bnb-brand i {
+    font-size: 28px;
+}
+
+
+.bnb-link {
+    position: relative;
+
+    color: #555555 !important;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 10px 16px !important;
+
+    transition: color 0.2s ease;
+}
+
+.bnb-link:hover {
+    color: #111111 !important;
+}
+
+
+/* Active Link */
+
+.bnb-link.active {
+    color: #111111 !important;
+    font-weight: 600;
+}
+
+.bnb-link.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+    bottom: 3px;
+
+    height: 2px;
+
+    background: #222222;
+
+    border-radius: 10px;
+}
+
+
+
+.bnb-search {
+    display: flex;
+    align-items: center;
+
+    width: 240px;
+    height: 44px;
+
+    padding: 0 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+    border-radius: 999px;
+
+    transition: 0.2s ease;
+}
+
+.bnb-search:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.bnb-search:focus-within {
+    border-color: #999999;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bnb-search i {
+    color: #555555;
+    margin-right: 9px;
+}
+
+.bnb-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+}
+
+.bnb-search input::placeholder {
+    color: #888888;
+}
+
+
+
+
+@media (max-width: 991px) {
+
+    .bnb-navbar {
+        padding: 10px 0;
+    }
+
+    .bnb-navbar .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .bnb-link {
+        padding: 10px 0 !important;
+    }
+
+    .bnb-link.active::after {
+        display: none;
+    }
+
+    .bnb-search {
+        width: 100%;
+
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+}
