@@ -1,7 +1,7 @@
 // Imports
 const express = require('express')
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const path = require("path")
 const Listing = require(`./models/listing.js`)
 const mongoose = require("mongoose")
@@ -107,6 +107,6 @@ app.delete("/listings/:id", async (req, res) => {
 })
 
 // Listen
-app.listen(port, () => {
-    console.log("Server Running at PORT: " + port);
+app.listen(PORT, () => {
+    console.log("Server Running at PORT: " + PORT);
 })
