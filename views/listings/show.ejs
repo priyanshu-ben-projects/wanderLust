@@ -1,0 +1,92 @@
+<% layout('./layout/boilerplate') -%>
+
+    <div class="listing-show-page">
+
+        <div class="listing-show-container">
+
+            <!-- Back -->
+            <a href="/listings" class="back-link">
+                ← Back to Listings
+            </a>
+
+            <!-- Main Listing Card -->
+            <div class="listing-show-card">
+
+                <!-- Image Section -->
+                <div class="listing-show-image-wrapper">
+
+                    <img src="<%= e.image?.url || 'https://via.placeholder.com/900x600' %>" alt="<%= e.title %>"
+                        class="listing-show-image" />
+
+                    <% if (e.image?.filename) { %>
+                        <span class="listing-image-badge">
+                            <%= e.image.filename %>
+                        </span>
+                        <% } %>
+
+                </div>
+
+
+                <!-- Details Section -->
+                <div class="listing-show-content">
+
+                    <!-- Location -->
+                    <p class="listing-location">
+                        <%= e.location %>, <%= e.country %>
+                    </p>
+
+                    <!-- Title -->
+                    <h1 class="listing-show-title">
+                        <%= e.title %>
+                    </h1>
+
+                    <!-- Description -->
+                    <div class="listing-description-section">
+
+                        <h2>About this place</h2>
+
+                        <p class="listing-show-description">
+                            <%= e.description %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Price -->
+                    <div class="listing-price-box">
+
+                        <div>
+                            <span class="price-label">Price</span>
+
+                            <div class="listing-show-price">
+                                &#8377;
+                                <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %>
+                                    <span>/ night</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Actions -->
+                    <div class="listing-actions">
+
+                        <a href="/listings/<%= e._id %>/edit" class="btn btn-edit">
+                            Edit Listing
+                        </a>
+
+                        <form action="/listings/<%= e._id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-delete">
+                                Delete Listing
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

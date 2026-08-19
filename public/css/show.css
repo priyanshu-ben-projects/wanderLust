@@ -1,0 +1,308 @@
+.listing-show-page {
+    min-height: calc(100vh - 80px);
+    padding: 50px 20px;
+    background: #f8fafc;
+}
+
+.listing-show-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* Back Button */
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+
+    color: #475569;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #111827;
+}
+
+
+/* Main Card */
+
+.listing-show-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Image */
+
+.listing-show-image-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 500px;
+
+    overflow: hidden;
+}
+
+.listing-show-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Image Badge */
+
+.listing-image-badge {
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 14px;
+
+    background: rgba(15, 23, 42, 0.8);
+    color: #ffffff;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* Content */
+
+.listing-show-content {
+    padding: 35px 40px 40px;
+}
+
+
+/* Location */
+
+.listing-location {
+    margin: 0 0 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* Title */
+
+.listing-show-title {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+
+/* Description */
+
+.listing-description-section {
+    margin-top: 30px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.listing-description-section h2 {
+    margin: 0 0 12px;
+
+    color: #111827;
+
+    font-size: 20px;
+}
+
+.listing-show-description {
+    max-width: 800px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* Price */
+
+.listing-price-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 30px;
+
+    padding: 22px 25px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+.price-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.listing-show-price {
+    color: #111827;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.listing-show-price span {
+    color: #64748b;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+/* Actions */
+
+.listing-actions {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.listing-actions form {
+    margin: 0;
+}
+
+
+/* Buttons */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 46px;
+
+    padding: 0 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-edit {
+    background: #111827;
+    color: #ffffff;
+}
+
+.btn-delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+    .listing-show-page {
+        padding: 30px 15px;
+    }
+
+    .listing-show-image-wrapper {
+        height: 350px;
+    }
+
+    .listing-show-content {
+        padding: 25px 20px 30px;
+    }
+
+    .listing-show-title {
+        font-size: 32px;
+    }
+
+    .listing-actions {
+        flex-direction: column;
+    }
+
+    .listing-actions .btn {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .listing-show-image-wrapper {
+        height: 260px;
+    }
+
+    .listing-show-content {
+        padding: 20px 16px 25px;
+    }
+
+    .listing-show-title {
+        font-size: 27px;
+    }
+
+    .listing-show-description {
+        font-size: 15px;
+    }
+
+    .listing-show-price {
+        font-size: 24px;
+    }
+
+}

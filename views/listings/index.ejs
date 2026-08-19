@@ -2,40 +2,57 @@
 
     <div class="listings-grid">
         <% if (typeof showAll !=='undefined' && showAll.length> 0) { %>
+
             <% for (let e of showAll) { %>
-                <div class="card">
-                    <!-- Image & Filename badge -->
-                    <div class="card-img-wrapper">
-                        <img src="<%= e.image?.url || 'https://via.placeholder.com/300' %>" alt="<%= e.title %>"
-                            class="card-img" />
-                        <% if (e.image?.filename) { %>
-                            <span class="card-badge">
-                                <%= e.image.filename %>
-                            </span>
-                            <% } %>
-                    </div>
 
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <%= e.title %>
-                        </h3>
-                        <p class="card-description">
-                            <%= e.description %>
-                        </p>
+                <a href="/listings/<%= e._id %>" class="listing-card-link">
+                    <div class="card">
 
-                        <div class="card-footer">
-                            <span class="card-price">
-                                &#8377; <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %> / night
-                            </span>
-                            <span class="card-location">
-                                <%= e.location %>, <%= e.country %>
-                            </span>
+                        <!-- Image & Filename badge -->
+                        <div class="card-img-wrapper">
+                            <img src="<%= e.image?.url || 'https://via.placeholder.com/300' %>" alt="<%= e.title %>"
+                                class="card-img" />
+
+                            <% if (e.image?.filename) { %>
+                                <span class="card-badge">
+                                    <%= e.image.filename %>
+                                </span>
+                                <% } %>
                         </div>
+
+                        <div class="card-body">
+
+                            <h3 class="card-title">
+                                <%= e.title %>
+                            </h3>
+
+                            <p class="card-description">
+                                <%= e.description %>
+                            </p>
+
+                            <div class="card-footer">
+
+                                <span class="card-price">
+                                    &#8377;
+                                    <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %>
+                                        / night
+                                </span>
+
+                                <span class="card-location">
+                                    <%= e.location %>, <%= e.country %>
+                                </span>
+
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </a>
+
                 <% } %>
+
                     <% } else { %>
+
                         <p>No listings found.</p>
+
                         <% } %>
-    </div>
     </div>
