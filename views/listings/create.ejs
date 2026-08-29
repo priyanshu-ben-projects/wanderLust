@@ -1,6 +1,6 @@
 <% layout('./layout/boilerplate') -%>
 
-    <form action="/listings/create" method="post" class="container my-5">
+    <form action="/listings/create" method="post" novalidate class="needs-validation container my-5 ">
 
         <div class="card shadow-sm border-0">
             <div class="card-body p-4 p-md-5">
@@ -15,6 +15,7 @@
 
                     <input type="text" id="title" name="listing[title]" value="Cozy Mountain Villa"
                         placeholder="e.g., Cozy Beachside Cabin" class="form-control" required>
+                    <div class="valid-feedback">Looks Good!</div>
                 </div>
 
 
@@ -50,8 +51,9 @@
                     <div class="input-group">
                         <span class="input-group-text">$</span>
 
-                        <input type="number" id="price" name="listing[price]" min="0" step="0.01" value="150.00"
+                        <input type="text" id="price" name="listing[price]" min="0" step="0.01" value="150.00"
                             placeholder="0.00" class="form-control" required>
+                        <div class="invalid-feedback">Please Enter a Valid Price</div>
                     </div>
                 </div>
 

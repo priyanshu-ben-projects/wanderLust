@@ -1,6 +1,6 @@
 <% layout('./layout/boilerplate') -%>
 
-    <form action="/listings/<%= e._id %>?_method=PUT" method="post" class="container my-5">
+    <form action="/listings/<%= e._id %>?_method=PUT" method="post" novalidate class="needs-validation container my-5">
 
         <div class="card shadow-sm border-0">
 
@@ -51,7 +51,7 @@
                     </label>
 
                     <input type="url" id="imageUrl" name="listing[image][url]" value="<%= e.image?.url || '' %>"
-                        placeholder="https://example.com/image.jpg" class="form-control">
+                        placeholder="https://example.com/image.jpg" class="form-control" required>
 
                 </div>
 

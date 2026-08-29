@@ -8,6 +8,8 @@ const mongoose = require("mongoose")
 const engine = require('ejs-mate')
 const MONGO_URL = `mongodb://127.0.0.1:27017/major`;
 const methodOverride = require("method-override");
+const wrapAsync = require("./utils/wrapAsync.js")
+const ExpressError = require("./utils/ExpressError.js");
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }))
@@ -46,7 +48,7 @@ app.get("/listings", async (req, res) => {
 })
 
 // Search Route
-app.get("/listings/search", async (req, res) => {
+app.get("/listings/search", wrapAsync(async (req, res) => {
     const { q } = req.query;
     if (!q || q.trim() === "") {
         return res.redirect("/listings");
@@ -63,7 +65,7 @@ app.get("/listings/search", async (req, res) => {
         showAll: listings
     });
 
-})
+}))
 
 // Create Form Route
 app.get("/listings/create", async (req, res) => {
@@ -71,17 +73,18 @@ app.get("/listings/create", async (req, res) => {
 })
 
 // Create (Post Request)
-app.post("/listings/create", async (req, res) => {
+app.post("/listings/create", wrapAsync(async (req, res) => {
     const listing = await Listing.create(req.body.listing);
+    console.log(listing)
     res.redirect('/listings')
-})
+}));
 
 // Show (Read) Route
-app.get("/listings/:id", async (req, res) => {
+app.get("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/show.ejs", { e: listing })
-})
+}));
 
 
 // Edit (Render Form)
@@ -92,19 +95,32 @@ app.get("/listings/:id/edit", async (req, res) => {
 })
 
 // Patch Request (Update Route)
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     console.log(req.body.listing)
     const listing = await Listing.findByIdAndUpdate(id, req.body.listing);
     res.redirect(`/listings/${id}`)
-})
+}));
 
 // Delete Request (Destroy Route)
-app.delete("/listings/:id", async (req, res) => {
+app.delete("/listings/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findByIdAndDelete(id);
     res.redirect(`/listings`)
-})
+}))
+
+// For All ❣
+app.all("/*splat", (req, res, next) => {
+    next(new ExpressError(404, "Page not Found!"));
+});
+
+
+// Default Error Middlewware
+app.use((err, req, res, next) => {
+    console.log(err)
+    let { statusCode, message } = err;
+    res.status(statusCode).send(message);
+});
 
 // Listen
 app.listen(PORT, () => {
