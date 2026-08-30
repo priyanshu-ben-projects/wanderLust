@@ -10,6 +10,9 @@ const MONGO_URL = `mongodb://127.0.0.1:27017/major`;
 const methodOverride = require("method-override");
 const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./utils/ExpressError.js");
+const { ListingSchema } = require("./schema.js")
+
+
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }))
@@ -74,6 +77,12 @@ app.get("/listings/create", async (req, res) => {
 
 // Create (Post Request)
 app.post("/listings/create", wrapAsync(async (req, res) => {
+    const result = ListingSchema.validate(req.body);
+
+    if (result.error) {
+        throw new ExpressError(404, result.error)
+    }
+
     const listing = await Listing.create(req.body.listing);
     console.log(listing)
     res.redirect('/listings')
@@ -83,6 +92,9 @@ app.post("/listings/create", wrapAsync(async (req, res) => {
 app.get("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
+    if (!listing) {
+        throw new ExpressError(400, "Lisiting NOT found!")
+    }
     res.render("listings/show.ejs", { e: listing })
 }));
 
@@ -110,16 +122,17 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 }))
 
 // For All ❣
-app.all("/*splat", (req, res, next) => {
-    next(new ExpressError(404, "Page not Found!"));
-});
+// app.all("/*splat", (req, res, next) => {
+//     next(new ExpressError(404, "Page not Found!"));
+// });
 
 
-// Default Error Middlewware
+// Default Error Handler
 app.use((err, req, res, next) => {
-    console.log(err)
-    let { statusCode, message } = err;
-    res.status(statusCode).send(message);
+    let { statusCode = 500, message = "Something went wrong!" } = err;
+    console.log(err);
+
+    res.status(statusCode).render("error.ejs", { statusCode, message });
 });
 
 // Listen
