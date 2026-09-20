@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const defaultLink = "https://i.pinimg.com/originals/98/61/79/9861791d200896f9e966db09978c09f2.jpg?nii=t";
-
-const ListingSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const ListingSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -34,11 +34,19 @@ const ListingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ],
     rating: {
         type: Number,
         default: 4.5
     }
 });
+
+
 
 const Listing = mongoose.model("Listing", ListingSchema);
 
