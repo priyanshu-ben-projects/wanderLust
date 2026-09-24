@@ -53,6 +53,7 @@ router.get("/create", (req, res) => {
 // Create (Post Request)
 router.post("/create", validateListing, wrapAsync(async (req, res) => {
     const listing = await Listing.create(req.body.listing);
+    req.flash("success", "New Listing Created!");
     res.redirect('/listings')
 }));
 
