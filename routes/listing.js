@@ -62,7 +62,9 @@ router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
-        throw new ExpressError(404, "Listing NOT found!")
+        req.flash("error", "Listings Not Found!");
+        return res.redirect("/listings");
+        // throw new ExpressError(404, "Listing NOT found!")
     }
     res.render("listings/show.ejs", { e: listing })
 }));
@@ -93,6 +95,7 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
 router.delete("/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted!");
     res.redirect(`/listings`)
 }))
 
