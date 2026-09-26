@@ -31,6 +31,24 @@
                 </li>
 
             </ul>
+            <!-- Navigation -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <% if(!currentUser){ %>
+                    <li class="nav-item">
+                        <a class="nav-link bnb-link active" href="/login">
+                            Login
+                        </a>
+                    </li>
+                    <% } %>
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link bnb-link" href="/logout">
+                                    Logout
+                                </a>
+                            </li>
+                            <% } %>
+
+            </ul>
 
             <!-- Search -->
             <form class="bnb-search d-flex" action="/listings/search/" method="GET">
