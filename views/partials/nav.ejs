@@ -3,61 +3,80 @@
 
         <!-- Brand -->
         <a class="navbar-brand bnb-brand" href="/listings">
-            <i class="bi bi-compass"></i>
-            <span>WanderLust</span>
+            <span class="bnb-brand-icon">
+                <i class="bi bi-compass"></i>
+            </span>
+            <span class="bnb-brand-text">WanderLust</span>
         </a>
 
         <!-- Mobile Toggle -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler bnb-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <i class="bi bi-list"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarContent">
 
-            <!-- Navigation -->
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <!-- Main Navigation -->
+            <ul class="navbar-nav bnb-main-nav mx-auto mb-3 mb-lg-0">
 
                 <li class="nav-item">
                     <a class="nav-link bnb-link active" href="/listings">
+                        <i class="bi bi-compass me-1"></i>
                         Explore
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link bnb-link" href="/listings/create">
+                        <i class="bi bi-plus-circle me-1"></i>
                         Create Listing
                     </a>
                 </li>
-
-            </ul>
-            <!-- Navigation -->
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <% if(!currentUser){ %>
-                    <li class="nav-item">
-                        <a class="nav-link bnb-link active" href="/login">
-                            Login
-                        </a>
-                    </li>
-                    <% } %>
-                        <% if(currentUser){ %>
-                            <li class="nav-item">
-                                <a class="nav-link bnb-link" href="/logout">
-                                    Logout
-                                </a>
-                            </li>
-                            <% } %>
 
             </ul>
 
             <!-- Search -->
             <form class="bnb-search d-flex" action="/listings/search/" method="GET">
 
-                <i class="bi bi-search"></i>
+                <i class="bi bi-search bnb-search-icon"></i>
 
                 <input type="search" name="q" placeholder="Search destinations" aria-label="Search">
 
+                <button type="submit" class="bnb-search-btn">
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
             </form>
+
+            <!-- Authentication -->
+            <ul class="navbar-nav bnb-auth-nav ms-lg-3">
+
+                <% if(!currentUser){ %>
+
+                    <li class="nav-item">
+                        <a class="nav-link bnb-login" href="/login">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>
+                            Login
+                        </a>
+                    </li>
+
+                    <% } %>
+
+                        <% if(currentUser){ %>
+
+                            <li class="nav-item">
+                                <a class="nav-link bnb-logout" href="/logout">
+                                    <i class="bi bi-box-arrow-right me-1"></i>
+                                    Logout
+                                </a>
+                            </li>
+
+                            <% } %>
+
+            </ul>
 
         </div>
     </div>

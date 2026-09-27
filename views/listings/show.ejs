@@ -1,153 +1,283 @@
 <% layout('./layout/boilerplate') -%>
 
+
     <div class="listing-show-page">
 
         <div class="listing-show-container">
 
-            <!-- Back Link -->
+            <!-- Back -->
             <a href="/listings" class="back-link">
-                ← Back to Listings
+                <i class="bi bi-arrow-left"></i>
+                Back to Listings
             </a>
 
-            <!-- Main Listing Card -->
+            <!-- Listing -->
             <div class="listing-show-card">
 
-                <!-- Image Section -->
+                <!-- Hero Image -->
                 <div class="listing-show-image-wrapper">
 
                     <img src="<%= e.image?.url || 'https://via.placeholder.com/900x600' %>" alt="<%= e.title %>"
                         class="listing-show-image" />
 
+                    <div class="listing-image-overlay"></div>
+
                     <% if (e.image?.filename) { %>
                         <span class="listing-image-badge">
+                            <i class="bi bi-image me-1"></i>
                             <%= e.image.filename %>
                         </span>
                         <% } %>
 
                 </div>
 
-                <!-- Details Section -->
+
+                <!-- Content -->
                 <div class="listing-show-content">
 
                     <!-- Location -->
-                    <p class="listing-location">
-                        <%= e.location %>, <%= e.country %>
-                    </p>
+                    <div class="listing-location">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>
+                            <%= e.location %>, <%= e.country %>
+                        </span>
+                    </div>
 
                     <!-- Title -->
                     <h1 class="listing-show-title">
                         <%= e.title %>
                     </h1>
 
+
                     <!-- Description -->
                     <div class="listing-description-section">
-                        <h2>About this place</h2>
+
+                        <h2>
+                            <i class="bi bi-house-heart"></i>
+                            About this place
+                        </h2>
+
                         <p class="listing-show-description">
                             <%= e.description %>
                         </p>
+
                     </div>
+
 
                     <!-- Price -->
                     <div class="listing-price-box">
-                        <div>
-                            <span class="price-label">Price</span>
+
+                        <div class="price-content">
+
+                            <span class="price-label">
+                                Price per night
+                            </span>
+
                             <div class="listing-show-price">
-                                &#8377;
+                                <span class="currency">₹</span>
                                 <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %>
-                                    <span>/ night</span>
+                                    <span class="price-night">/ night</span>
                             </div>
+
                         </div>
+
+                        <div class="price-icon">
+                            <i class="bi bi-tag"></i>
+                        </div>
+
                     </div>
+
 
                     <!-- Actions -->
                     <div class="listing-actions">
+
                         <a href="/listings/<%= e._id %>/edit" class="btn btn-edit">
+                            <i class="bi bi-pencil-square"></i>
                             Edit Listing
                         </a>
 
                         <form action="/listings/<%= e._id %>?_method=DELETE" method="POST">
                             <button type="submit" class="btn btn-delete">
+                                <i class="bi bi-trash3"></i>
                                 Delete Listing
                             </button>
                         </form>
+
                     </div>
 
-                    <!-- ================= REVIEW SECTION ================= -->
-                    <div class="listing-review-section mt-5 pt-4 border-top">
 
-                        <h2 class="mb-4">Leave a Review</h2>
+                    <!-- Reviews -->
+                    <div class="listing-review-section">
 
-                        <form action="/listings/<%= e._id %>/reviews" method="POST" class="needs-validation" novalidate>
+                        <div class="review-section-header">
 
-                            <!-- Rating Field -->
-                            <div class="mb-3">
-                                <label for="rating" class="form-label fw-bold">Rating</label>
-                                <input type="range" class="form-range" min="1" max="5" value="3" id="rating"
-                                    name="review[rating]">
+                            <div>
+                                <span class="section-eyebrow">
+                                    COMMUNITY
+                                </span>
+
+                                <h2>
+                                    Guest Reviews
+                                </h2>
+
+                                <p>
+                                    Share your experience and help other travelers.
+                                </p>
                             </div>
 
-                            <!-- Date Field -->
-                            <div class="mb-3">
-                                <label for="date" class="form-label fw-bold">Date of Visit</label>
-                                <input type="date" class="form-control" id="date" name="review[createdAt]" required>
-                                <div class="invalid-feedback">Please select a date.</div>
-                            </div>
-
-                            <!-- Comment Field -->
-                            <div class="mb-3">
-                                <label for="comment" class="form-label fw-bold">Comment</label>
-                                <textarea class="form-control" id="comment" name="review[comment]" rows="4"
-                                    placeholder="Write your experience..." required></textarea>
-                                <div class="invalid-feedback">Please add some comments for your review.</div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-edit mt-2">Submit Review</button>
-                        </form>
-
-                        <!-- Display Existing Reviews -->
-                        <% if (e.reviews && e.reviews.length> 0) { %>
-                            <div class="mt-5 pt-4 border-top">
-                                <h3 class="mb-4">All Reviews (<%= e.reviews.length %>)</h3>
-
-                                <div class="row g-3">
-                                    <% for (let review of e.reviews) { %>
-                                        <div class="col-12 col-md-6">
-                                            <div class="card h-100 border-0 shadow-sm bg-light">
-                                                <div class="card-body d-flex flex-column justify-content-between p-3">
-                                                    <div>
-                                                        <div
-                                                            class="d-flex justify-content-between align-items-center mb-2">
-                                                            <span class="badge bg-dark text-wrap">
-                                                                <%= review.rating %> / 5 ⭐
-                                                            </span>
-
-                                                            <% if (review.createdAt) { %>
-                                                                <small class="text-muted">
-                                                                    <%= new
-                                                                        Date(review.createdAt).toLocaleDateString("en-IN",
-                                                                        { day: 'numeric' , month: 'short' ,
-                                                                        year: 'numeric' }) %>
-                                                                </small>
-                                                                <% } %>
-                                                        </div>
-
-                                                        <p class="card-text text-dark mt-2 mb-3">
-                                                            <%= review.comment %>
-                                                        </p>
-                                                    </div>
-
-                                                    <!-- Delete Review Action -->
-                                                    <form class="mt-2 align-self-end" method="POST"
-                                                        action="/listings/<%= e._id %>/reviews/<%= review._id %>?_method=DELETE">
-                                                        <button class="btn btn-sm btn-delete">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <% } %>
+                            <% if (e.reviews && e.reviews.length> 0) { %>
+                                <div class="review-count">
+                                    <i class="bi bi-chat-square-heart"></i>
+                                    <%= e.reviews.length %>
                                 </div>
+                                <% } %>
+
+                        </div>
+
+
+                        <!-- Review Form -->
+                        <div class="review-form-card">
+
+                            <h3>
+                                <i class="bi bi-pencil-heart"></i>
+                                Leave a Review
+                            </h3>
+
+                            <form action="/listings/<%= e._id %>/reviews" method="POST" class="needs-validation"
+                                novalidate>
+
+                                <!-- Rating -->
+                                <div class="review-field">
+
+                                    <label for="rating">
+                                        Rating
+                                    </label>
+
+                                    <div class="rating-input-wrapper">
+
+                                        <input type="range" class="form-range" min="1" max="5" value="3" id="rating"
+                                            name="review[rating]">
+
+                                        <div class="rating-scale">
+                                            <span>1</span>
+                                            <span>2</span>
+                                            <span>3</span>
+                                            <span>4</span>
+                                            <span>5</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Date -->
+                                <div class="review-field">
+
+                                    <label for="date">
+                                        Date of Visit
+                                    </label>
+
+                                    <input type="date" class="form-control review-input" id="date"
+                                        name="review[createdAt]" required>
+
+                                    <div class="invalid-feedback">
+                                        Please select a date.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Comment -->
+                                <div class="review-field">
+
+                                    <label for="comment">
+                                        Your Experience
+                                    </label>
+
+                                    <textarea class="form-control review-input" id="comment" name="review[comment]"
+                                        rows="4" placeholder="Tell other travelers about your experience..."
+                                        required></textarea>
+
+                                    <div class="invalid-feedback">
+                                        Please add some comments for your review.
+                                    </div>
+
+                                </div>
+
+
+                                <button type="submit" class="btn review-submit">
+                                    <i class="bi bi-send"></i>
+                                    Submit Review
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- Existing Reviews -->
+                        <% if (e.reviews && e.reviews.length> 0) { %>
+
+                            <div class="existing-reviews">
+
+                                <div class="existing-reviews-header">
+                                    <h3>
+                                        Recent Experiences
+                                    </h3>
+
+                                    <span>
+                                        <%= e.reviews.length %> reviews
+                                    </span>
+                                </div>
+
+
+                                <div class="reviews-grid">
+
+                                    <% for (let review of e.reviews) { %>
+
+                                        <div class="review-card">
+
+                                            <div class="review-card-top">
+
+                                                <div class="review-stars">
+                                                    <% for (let i=1; i <=5; i++) { %>
+                                                        <i
+                                                            class="bi bi-star-fill <%= i <= review.rating ? 'active' : '' %>"></i>
+                                                        <% } %>
+                                                </div>
+
+                                                <% if (review.createdAt) { %>
+                                                    <span class="review-date">
+                                                        <%= new Date(review.createdAt).toLocaleDateString("en-IN", {
+                                                            day: 'numeric' , month: 'short' , year: 'numeric' }) %>
+                                                    </span>
+                                                    <% } %>
+
+                                            </div>
+
+
+                                            <p class="review-comment">
+                                                <%= review.comment %>
+                                            </p>
+
+
+                                            <form method="POST"
+                                                action="/listings/<%= e._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                                <button class="review-delete" type="submit">
+                                                    <i class="bi bi-trash3"></i>
+                                                    Delete
+                                                </button>
+                                            </form>
+
+                                        </div>
+
+                                        <% } %>
+
+                                </div>
+
                             </div>
+
                             <% } %>
 
                     </div>

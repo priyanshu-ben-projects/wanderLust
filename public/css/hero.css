@@ -1,0 +1,143 @@
+/* Airbnb / Light Minimalist Theme */
+
+:root {
+    --theme-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --theme-dark: #222222;
+    --theme-muted: #6a6a6a;
+    --theme-light-bg: #f7f7f7;
+    --theme-border: #e0e0e0;
+    --theme-accent: #ff385c;
+    /* Airbnb Coral Accent */
+    --theme-accent-hover: #e00b41;
+}
+
+body {
+    font-family: var(--theme-font);
+    color: var(--theme-dark);
+    background-color: #ffffff;
+}
+
+/* Hero Outer Container */
+.hero-minimal-section {
+    position: relative;
+    background-color: #ffffff;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* Card Banner Wrap */
+.hero-banner-card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    min-height: 480px;
+    background-color: var(--theme-light-bg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.hero-banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Soft Gradient Overlay for readable white text */
+.hero-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.45) 100%);
+}
+
+/* Typography & Content */
+.hero-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 580px;
+    font-weight: 400;
+}
+
+/* Minimal Badge */
+.glass-pill-badge {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-accent {
+    background-color: var(--theme-accent);
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-accent:hover {
+    background-color: var(--theme-accent-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-outline-minimal {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--theme-dark);
+    border: 1px solid var(--theme-border);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-minimal:hover {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    color: #717171;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.category-item:hover,
+.category-item.active {
+    color: #222222;
+    border-bottom-color: #222222;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767.98px) {
+    .hero-banner-card {
+        border-radius: 1rem;
+        min-height: 380px;
+    }
+
+}

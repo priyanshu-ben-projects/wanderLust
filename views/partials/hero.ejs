@@ -1,0 +1,116 @@
+<!-- Hero Section -->
+<section class="hero-minimal-section">
+    <div class="container">
+
+        <!-- Hero Banner Card -->
+        <div class="hero-banner-card d-flex align-items-end p-4 p-md-5">
+            <img src="<%= heroData.bgImage %>" alt="Travel Banner" class="hero-banner-img">
+            <div class="hero-banner-overlay"></div>
+
+            <!-- Banner Content -->
+            <div class="position-relative z-1 text-white w-100 max-w-600">
+                <% if (heroData.badge) { %>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill glass-pill-badge mb-3">
+                        <span>
+                            <%= heroData.badge.text %>
+                        </span>
+                    </div>
+                    <% } %>
+
+                        <h1 class="hero-title mb-2">
+                            <%= heroData.titlePrefix %> <span class="d-inline-block">
+                                    <%= heroData.highlightText %>
+                                </span>
+                        </h1>
+
+                        <p class="hero-subtitle mb-4">
+                            <%= heroData.subtitle %>
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="<%= heroData.primaryCtaUrl || '#listings-section' %>"
+                                class="btn btn-accent rounded-pill px-4 py-2">
+                                <%= heroData.primaryCtaText || 'Explore Stays' %>
+                            </a>
+                            <% if (heroData.videoUrl) { %>
+                                <button type="button" class="btn btn-outline-minimal rounded-pill px-4 py-2"
+                                    data-bs-toggle="modal" data-bs-target="#videoModal">
+                                    <i class="bi bi-play-circle me-1"></i> Watch Video
+                                </button>
+                                <% } %>
+                        </div>
+            </div>
+        </div>
+
+        <!-- Feature Highlights Replacement -->
+        <div class="floating-features-wrap" style="margin-top: -2rem;">
+            <div class="container">
+                <div class="row g-3 justify-content-center">
+
+                    <div class="col-12 col-md-4">
+                        <div
+                            class="card border-0 shadow-sm rounded-4 p-3 d-flex flex-row align-items-center gap-3 bg-white">
+                            <div class="rounded-circle bg-danger-subtle p-3 text-danger d-flex align-items-center justify-content-center"
+                                style="width: 48px; height: 48px;">
+                                <i class="bi bi-shield-check fs-5"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">Verified Listings</h6>
+                                <p class="small text-muted mb-0">100% inspected properties</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div
+                            class="card border-0 shadow-sm rounded-4 p-3 d-flex flex-row align-items-center gap-3 bg-white">
+                            <div class="rounded-circle bg-danger-subtle p-3 text-danger d-flex align-items-center justify-content-center"
+                                style="width: 48px; height: 48px;">
+                                <i class="bi bi-calendar-x fs-5"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">Flexible Booking</h6>
+                                <p class="small text-muted mb-0">Free cancellation on most stays</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div
+                            class="card border-0 shadow-sm rounded-4 p-3 d-flex flex-row align-items-center gap-3 bg-white">
+                            <div class="rounded-circle bg-danger-subtle p-3 text-danger d-flex align-items-center justify-content-center"
+                                style="width: 48px; height: 48px;">
+                                <i class="bi bi-headset fs-5"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">24/7 Superhost Support</h6>
+                                <p class="small text-muted mb-0">We are here for every step</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+<!-- Video Lightbox Modal -->
+<% if (heroData.videoUrl) { %>
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-0">
+                <div class="modal-header border-0 text-white">
+                    <h5 class="modal-title">Experience</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 ratio ratio-16x9">
+                    <iframe src="<%= heroData.videoUrl %>" title="Travel Preview" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>

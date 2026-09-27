@@ -1,0 +1,490 @@
+.wl-auth-page {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 56, 92, 0.06), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(255, 56, 92, 0.05), transparent 30%),
+        #fafafa;
+}
+
+.wl-auth-container {
+    width: 100%;
+    max-width: 470px;
+}
+
+/* Card */
+
+.wl-auth-card {
+    background: #fff;
+    border: 1px solid #eeeeee;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.07),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Header */
+
+.wl-auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.wl-auth-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.1rem;
+    border-radius: 16px;
+    background: #ff385c;
+    color: #fff;
+    font-size: 1.3rem;
+    box-shadow: 0 8px 20px rgba(255, 56, 92, 0.2);
+}
+
+.wl-auth-eyebrow {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: #ff385c;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.wl-auth-header h1 {
+    margin: 0;
+    color: #222;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.wl-auth-header p {
+    max-width: 340px;
+    margin: 0.65rem auto 0;
+    color: #777;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+/* Form */
+
+.wl-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.wl-auth-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.wl-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.wl-input-icon {
+    position: absolute;
+    left: 15px;
+    z-index: 2;
+    color: #888;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.wl-auth-input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    outline: none;
+    background: #fff;
+    padding: 0 45px;
+    color: #222;
+    font-size: 0.9rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.wl-auth-input::placeholder {
+    color: #aaa;
+}
+
+.wl-auth-input:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1);
+}
+
+.wl-input-wrapper:focus-within .wl-input-icon {
+    color: #ff385c;
+}
+
+/* Password */
+
+.wl-password-toggle {
+    position: absolute;
+    right: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.wl-password-toggle:hover {
+    background: #f7f7f7;
+    color: #ff385c;
+}
+
+/* Validation */
+
+.wl-auth-field .valid-feedback,
+.wl-auth-field .invalid-feedback {
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+}
+
+/* Options */
+
+.wl-auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -0.2rem;
+}
+
+.wl-remember {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #777;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.wl-remember input {
+    width: 15px;
+    height: 15px;
+    accent-color: #ff385c;
+    cursor: pointer;
+}
+
+.wl-auth-options a {
+    color: #666;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.wl-auth-options a:hover {
+    color: #ff385c;
+}
+
+/* Submit */
+
+.wl-auth-submit {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.35rem;
+    border: none;
+    border-radius: 12px;
+    background: #ff385c;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(255, 56, 92, 0.2);
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.wl-auth-submit:hover {
+    background: #e61e4d;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 56, 92, 0.28);
+}
+
+.wl-auth-submit:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+
+.wl-auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.8rem 0 1.4rem;
+    color: #aaa;
+    font-size: 0.75rem;
+}
+
+.wl-auth-divider::before,
+.wl-auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eeeeee;
+}
+
+/* Footer */
+
+.wl-auth-footer {
+    margin: 0;
+    text-align: center;
+    color: #777;
+    font-size: 0.82rem;
+}
+
+.wl-auth-footer a {
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.wl-auth-footer a:hover {
+    color: #ff385c;
+}
+
+/* Trust */
+
+.wl-auth-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+    color: #999;
+    font-size: 0.72rem;
+}
+
+.wl-auth-trust i {
+    color: #777;
+}
+
+/* Tablet */
+
+@media (max-width: 767.98px) {
+
+    .wl-auth-page {
+        min-height: calc(100vh - 75px);
+        padding: 2.5rem 1rem;
+    }
+
+    .wl-auth-card {
+        padding: 2.2rem 1.8rem;
+        border-radius: 22px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 575.98px) {
+
+    .wl-auth-page {
+        min-height: calc(100vh - 70px);
+        align-items: flex-start;
+        padding: 1.5rem 0.75rem 2rem;
+        background: #fafafa;
+    }
+
+    .wl-auth-container {
+        max-width: 100%;
+    }
+
+    .wl-auth-card {
+        width: 100%;
+        padding: 1.8rem 1.15rem;
+        border-radius: 20px;
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.06),
+            0 1px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Header */
+
+    .wl-auth-header {
+        margin-bottom: 1.6rem;
+    }
+
+    .wl-auth-icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 0.85rem;
+        border-radius: 14px;
+        font-size: 1.15rem;
+    }
+
+    .wl-auth-eyebrow {
+        margin-bottom: 0.35rem;
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+    }
+
+    .wl-auth-header h1 {
+        font-size: 1.4rem;
+        letter-spacing: -0.3px;
+    }
+
+    .wl-auth-header p {
+        margin-top: 0.5rem;
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
+    /* Form */
+
+    .wl-auth-form {
+        gap: 1rem;
+    }
+
+    .wl-auth-field label {
+        margin-bottom: 0.4rem;
+        font-size: 0.8rem;
+    }
+
+    .wl-auth-input {
+        height: 46px;
+        border-radius: 11px;
+        padding-left: 42px;
+        padding-right: 45px;
+        font-size: 0.85rem;
+    }
+
+    .wl-input-icon {
+        left: 13px;
+        font-size: 0.9rem;
+    }
+
+    .wl-password-toggle {
+        right: 6px;
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Options */
+
+    .wl-auth-options {
+        gap: 0.75rem;
+    }
+
+    .wl-remember,
+    .wl-auth-options a {
+        font-size: 0.75rem;
+    }
+
+    .wl-remember input {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Submit */
+
+    .wl-auth-submit {
+        height: 46px;
+        margin-top: 0.15rem;
+        border-radius: 11px;
+        font-size: 0.85rem;
+    }
+
+    /* Divider */
+
+    .wl-auth-divider {
+        margin: 1.4rem 0 1.15rem;
+    }
+
+    /* Footer */
+
+    .wl-auth-footer {
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
+    /* Trust */
+
+    .wl-auth-trust {
+        margin-top: 0.9rem;
+        font-size: 0.68rem;
+    }
+}
+
+/* Extra Small */
+
+@media (max-width: 380px) {
+
+    .wl-auth-page {
+        padding: 1rem 0.5rem 1.5rem;
+    }
+
+    .wl-auth-card {
+        padding: 1.5rem 1rem;
+        border-radius: 18px;
+    }
+
+    .wl-auth-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .wl-auth-header p {
+        font-size: 0.75rem;
+    }
+
+    .wl-auth-options {
+        flex-wrap: wrap;
+    }
+
+    .wl-auth-options a {
+        margin-left: auto;
+    }
+}
+
+/* Signup Mobile */
+
+@media (max-width: 575.98px) {
+
+    .wl-auth-page {
+        padding-top: 1.25rem;
+    }
+
+    .wl-auth-header {
+        margin-bottom: 1.45rem;
+    }
+
+    .wl-auth-form {
+        gap: 0.9rem;
+    }
+
+    .wl-auth-submit {
+        margin-top: 0.3rem;
+    }
+}

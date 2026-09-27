@@ -18,10 +18,35 @@ const validateListing = (req, res, next) => {
     }
 };
 
+const heroData = {
+    titlePrefix: "Explore The World",
+    highlightText: "Without Limits",
+    subtitle: "Discover hand-picked tropical destinations, exclusive travel packages, and custom itineraries crafted for your next big adventure.",
+    bgImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+    badge: {
+        tag: "EXPLORE 2026",
+        text: "Special Summer Packages Available"
+    },
+    primaryCtaText: "Start Exploring",
+    primaryCtaUrl: "#search-bar",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    stats: [
+        { value: "500+", label: "Destinations" },
+        { value: "12k+", label: "Happy Travelers" },
+        { value: "4.9 ★", label: "Average Rating" }
+    ],
+    featuredSpot: {
+        title: "Ubud Cultural Eco-Resort",
+        location: "Bali, Indonesia",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+    },
+    searchActionUrl: "/search"
+};
+
 // Listings Route
 router.get("/", wrapAsync(async (req, res) => {
     const showAll = await Listing.find({});
-    res.render("listings/index.ejs", { showAll })
+    res.render("listings/index.ejs", { showAll, heroData })
 
 }))
 
@@ -40,7 +65,8 @@ router.get("/search", wrapAsync(async (req, res) => {
     });
 
     res.render("listings/index", {
-        showAll: listings
+        showAll: listings,
+        heroData: heroData,
     });
 
 }))
