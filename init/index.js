@@ -20,7 +20,7 @@ async function main() {
 
 const initDB = async () => {
     await Listing.deleteMany({});
-    await Listing.insertMany(updatedData);
+    await Listing.insertMany(initData.data);
     console.log("DB is ready, but your ex isn't 😢");
 }
 

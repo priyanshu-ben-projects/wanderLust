@@ -27,23 +27,30 @@
                                     <%= e.title %>
                                 </h3>
 
-                                <p class="card-description">
-                                    <%= e.description %>
-                                </p>
+                                <!-- Owner Username Tag -->
+                                <% if (e.owner?.username) { %>
+                                    <p class="card-owner">
+                                        <i>Owned by @<%= e.owner.username %></i>
+                                    </p>
+                                    <% } %>
 
-                                <div class="card-footer">
+                                        <p class="card-description">
+                                            <%= e.description %>
+                                        </p>
 
-                                    <span class="card-price">
-                                        &#8377;
-                                        <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %>
-                                            / night
-                                    </span>
+                                        <div class="card-footer">
 
-                                    <span class="card-location">
-                                        <%= e.location %>, <%= e.country %>
-                                    </span>
+                                            <span class="card-price">
+                                                &#8377;
+                                                <%= e.price ? e.price.toLocaleString("en-IN") : 'N/A' %>
+                                                    / night
+                                            </span>
 
-                                </div>
+                                            <span class="card-location">
+                                                <%= e.location %>, <%= e.country %>
+                                            </span>
+
+                                        </div>
                             </div>
 
                         </div>
