@@ -5,6 +5,7 @@ const ExpressError = require("../utils/ExpressError.js");
 const { ReviewSchema } = require("../schema.js");
 const Review = require("../models/review.js");
 const Listing = require(`../models/listing.js`);
+const { isAuthor } = require("../middleware.js");
 
 const validateReview = (req, res, next) => {
     const { error } = ReviewSchema.validate(req.body);
@@ -26,7 +27,7 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
     req.body.review.rating = Number(req.body.review.rating);
     // Create New Review
     const newReview = new Review(req.body.review);
-
+    newReview.author = req.user._id;
     listing.reviews.push(newReview);
 
     // Save Docs
@@ -37,7 +38,7 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
 }));
 
 // Delete Review 
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId", isAuthor, wrapAsync(async (req, res) => {
 
     const { id, reviewId } = req.params;
 

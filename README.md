@@ -2,15 +2,15 @@
 
 # 🌍 WanderLust
 
-**A full-stack listing platform built to learn and practice production-ready backend development.**
+**A full-stack travel listing platform built to learn and practice real-world backend engineering.**
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=nodedotjs\&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge\&logo=express\&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb\&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge\&logo=mongoose\&logoColor=white)
-![EJS](https://img.shields.io/badge/EJS-B4CA65?style=for-the-badge\&logo=ejs\&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![EJS](https://img.shields.io/badge/EJS-B4CA65?style=for-the-badge&logo=ejs&logoColor=black)
 ![Joi](https://img.shields.io/badge/Joi-0080FF?style=for-the-badge)
-![Passport.js](https://img.shields.io/badge/Passport.js-34E27A?style=for-the-badge\&logo=passport\&logoColor=black)
+![Passport.js](https://img.shields.io/badge/Passport.js-34E27A?style=for-the-badge&logo=passport&logoColor=black)
 
 </div>
 
@@ -18,11 +18,30 @@
 
 ## 📖 About The Project
 
-**WanderLust** is a travel-stay listing platform inspired by Airbnb, where users can browse, search, create, edit, and delete property listings, as well as leave ratings and reviews.
+**WanderLust** is an Airbnb-inspired travel-stay listing platform where users can discover properties, search listings, create and manage listings, authenticate securely, and leave reviews.
 
-The main purpose of this project is **learning backend engineering by building a real-world application**.
+The primary purpose of this project is **learning backend engineering by building a real-world full-stack application**.
 
-Each feature has been implemented to practise backend concepts such as database relationships, request validation, authentication, authorization, sessions, cookies, flash messages, centralized error handling, reusable middleware, and modular Express architecture.
+Instead of learning backend concepts in isolation, WanderLust is being developed incrementally, with each new concept implemented directly into the project.
+
+The project currently covers:
+
+- Database relationships
+- Mongoose population
+- CRUD operations
+- Server-side validation
+- Authentication & authorization
+- Sessions & cookies
+- Flash messages
+- Protected routes
+- Ownership-based access control
+- Review systems
+- Centralized error handling
+- Reusable middleware
+- Modular Express architecture
+- EJS layouts and partials
+- Search functionality
+- Database seeding
 
 ---
 
@@ -30,68 +49,119 @@ Each feature has been implemented to practise backend concepts such as database 
 
 ### ✅ Implemented
 
-* 🏡 **Listings CRUD** — Create, view, update, and delete listings
-* 🔎 **Search** — Case-insensitive search on listing titles
-* ⭐ **Reviews** — Add and delete reviews with 1–5 star ratings
-* 🔗 **Database Relationships** — One-to-many `Listing → Reviews` relationships using Mongoose references and `populate()`
-* ✅ **Server-side Validation** — Joi schemas validate listings and reviews before they reach the database
-* 👤 **User Model** — Dedicated Mongoose User model for application users
-* 🔐 **Authentication** — User signup, login, and logout using Passport.js
-* 🔑 **Password Hashing** — Secure password storage using `passport-local-mongoose`
-* 🛡️ **Authentication Middleware** — Protected routes using `req.isAuthenticated()`
-* ↩️ **Login Redirects** — Users can be redirected back to the page they originally requested after login
-* 🍪 **Sessions & Cookies** — `express-session` with `httpOnly` cookies and 7-day expiry
-* 💬 **Flash Messages** — One-time success/error notifications using `connect-flash`
-* 🚨 **Centralized Error Handling** — Custom `ExpressError`, `wrapAsync`, and global error-handling middleware
-* 🧩 **Reusable Views** — EJS-Mate layouts and reusable partials
-* 🌱 **Database Seeding** — Sample listing data through the `init` script
+#### 🏡 Listings
 
-### 🚧 In Progress
+- **Listings CRUD** — Create, view, update, and delete property listings
+- **Listing Ownership** — Each listing is associated with its owner
+- **Ownership Authorization** — Only listing owners can edit or delete their listings
+- **Listing Details** — Display listing information along with reviews and owner information
+- **Search** — Case-insensitive search based on listing titles
 
-* 🛡️ **Authorization** — Owner-only permissions for listings and review authors
-* ⚡ **Redis** — Caching and session storage
-* ☁️ **Cloud Image Uploads** — Cloudinary integration
-* 🚀 **Production Deployment** — Final production deployment and configuration
+#### ⭐ Reviews
+
+- **Add Reviews** — Authenticated users can submit reviews
+- **Star Ratings** — Reviews support ratings from 1–5
+- **Delete Reviews** — Review authors can delete their own reviews
+- **Review Relationships** — Reviews are connected to both listings and users
+- **Review Population** — Review authors are populated when displaying a listing
+
+#### 🔐 Authentication & Authorization
+
+- **User Signup & Login** — Authentication using Passport.js
+- **Password Hashing** — Passwords handled through `passport-local-mongoose`
+- **Sessions** — Persistent authentication sessions using `express-session`
+- **HTTP-only Cookies** — Session cookies configured with `httpOnly`
+- **Protected Routes** — Authentication middleware protects sensitive operations
+- **Listing Authorization** — `isOwner` middleware verifies listing ownership
+- **Review Authorization** — `isAuthor` middleware verifies review ownership
+- **Login Redirects** — Users can be redirected back to their originally requested route
+
+#### 🛡️ Validation & Error Handling
+
+- **Joi Validation** — Server-side validation for listings and reviews
+- **Custom Errors** — `ExpressError` for structured application errors
+- **Async Error Handling** — `wrapAsync` eliminates repetitive `try/catch` blocks
+- **Centralized Error Handling** — Application-level error middleware
+- **Validation Before Database Operations** — Invalid listing/review data is rejected before persistence
+
+#### 💬 User Experience
+
+- **Flash Messages** — Success and error notifications using `connect-flash`
+- **Conditional UI** — Ownership-based action buttons
+- **Reusable EJS Partials** — Navbar, footer, flash messages, etc.
+- **EJS-Mate Layouts** — Reusable page layouts
+- **Responsive Interface**
+- **Travel Hero Section** — Featured travel content, CTA, statistics, and visual background
+- **Search Interface** — Dedicated listing search functionality
+
+#### 🌱 Database
+
+- **MongoDB Database**
+- **Mongoose ODM**
+- **Database Relationships**
+- **`populate()` for referenced documents**
+- **Database Seeding** through the `init` script
+
+---
+
+## 🚧 In Progress
+
+- ⚡ **Redis** — Caching and session storage
+- ☁️ **Cloud Image Uploads** — Cloudinary integration
+- 🚀 **Production Deployment** — Final production configuration
+- 🔍 **Further Search Improvements**
+- 🎨 **UI/UX Improvements**
 
 ---
 
 ## 🎯 Backend Concepts Covered
 
-| Concept                    | Where it's applied                                                            |
-| -------------------------- | ----------------------------------------------------------------------------- |
-| **Express Architecture**   | Modular `models/`, `routes/`, `views/`, `utils/`, and `init/` structure       |
-| **Database Relationships** | `Listing ↔ Review` one-to-many relationship with `populate()`                 |
-| **Mongoose Models**        | Listing, Review, and User models                                              |
-| **Express Routers**        | Separate listing, review, and user routes                                     |
-| **Middleware**             | Validation, authentication, sessions, flash messages, and reusable middleware |
-| **Validation**             | Joi schemas for listings and reviews                                          |
-| **Authentication**         | Passport.js with local username/password authentication                       |
-| **Password Hashing**       | `passport-local-mongoose`                                                     |
-| **Sessions & Cookies**     | `express-session`, `cookie-parser`, and `httpOnly` cookies                    |
-| **Flash Messages**         | `req.flash()` exposed to views through `res.locals`                           |
-| **Authorization**          | Protected routes using authentication middleware                              |
-| **Error Handling**         | `ExpressError` + `wrapAsync` + global error middleware                        |
-| **Redirect Handling**      | Saving the originally requested URL before authentication                     |
-| **Templating**             | EJS + EJS-Mate layouts and partials                                           |
+| Concept                    | Implementation                                                          |
+| -------------------------- | ----------------------------------------------------------------------- |
+| **Express Architecture**   | Modular `models/`, `routes/`, `views/`, `utils/`, and `init/` structure |
+| **Express Routers**        | Separate listing and review route modules                               |
+| **CRUD Operations**        | Listing creation, reading, updating, and deletion                       |
+| **Database Relationships** | Listing ↔ Review and User ↔ Listing/Review relationships                |
+| **Mongoose Models**        | Listing, Review, and User models                                        |
+| **Mongoose References**    | Documents connected through ObjectId references                         |
+| **Population**             | `populate()` used for owners and review authors                         |
+| **Middleware**             | Authentication, authorization, validation, sessions, and flash messages |
+| **Server-side Validation** | Joi schemas for listings and reviews                                    |
+| **Authentication**         | Passport.js local authentication                                        |
+| **Password Hashing**       | `passport-local-mongoose`                                               |
+| **Authorization**          | `isOwner` and `isAuthor` middleware                                     |
+| **Protected Routes**       | `isLoggedIn`, `isOwner`, and `isAuthor` middleware                      |
+| **Sessions**               | `express-session`                                                       |
+| **Cookies**                | HTTP-only session cookies                                               |
+| **Flash Messages**         | `connect-flash` with view locals                                        |
+| **Error Handling**         | `ExpressError` + `wrapAsync` + centralized middleware                   |
+| **Search**                 | MongoDB regex-based case-insensitive title search                       |
+| **Templating**             | EJS + EJS-Mate                                                          |
+| **Reusable Views**         | Layouts and partials                                                    |
+| **Database Seeding**       | Sample data through `init` scripts                                      |
+| **Redirect Handling**      | Saving and restoring the originally requested URL                       |
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer                   | Technology                     |
-| ----------------------- | ------------------------------ |
-| Runtime                 | Node.js                        |
-| Framework               | Express.js                     |
-| Database                | MongoDB + Mongoose             |
-| Authentication          | Passport.js                    |
-| Password Authentication | passport-local-mongoose        |
-| Templating              | EJS + ejs-mate                 |
-| Validation              | Joi                            |
-| Sessions                | express-session                |
-| Cookies                 | cookie-parser                  |
-| Flash Messages          | connect-flash                  |
-| HTTP Method Support     | method-override                |
-| Other                   | wrapAsync, custom ExpressError |
+| Layer                       | Technology              |
+| --------------------------- | ----------------------- |
+| **Runtime**                 | Node.js                 |
+| **Framework**               | Express.js              |
+| **Database**                | MongoDB                 |
+| **ODM**                     | Mongoose                |
+| **Authentication**          | Passport.js             |
+| **Password Authentication** | passport-local-mongoose |
+| **Templating**              | EJS                     |
+| **Template Layouts**        | ejs-mate                |
+| **Validation**              | Joi                     |
+| **Sessions**                | express-session         |
+| **Cookies**                 | cookie-parser           |
+| **Flash Messages**          | connect-flash           |
+| **HTTP Method Support**     | method-override         |
+| **Async Error Handling**    | wrapAsync               |
+| **Custom Errors**           | ExpressError            |
 
 ---
 
@@ -100,309 +170,411 @@ Each feature has been implemented to practise backend concepts such as database 
 ```bash
 WanderLust/
 │
-├── init/                      # Database seeding
-│   ├── data.js               # Sample listings
-│   └── index.js              # Seed script
+├── init/
+│   ├── data.js                 # Sample listing dataset
+│   └── index.js                # Database seeding script
 │
-├── models/                    # Mongoose schemas
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
+├── models/
+│   ├── listing.js              # Listing schema & model
+│   ├── review.js               # Review schema & model
+│   └── user.js                 # User schema & model
 │
-├── routes/                    # Express routers
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
+├── public/
+│   ├── css/                    # Custom stylesheets
+│   ├── js/                     # Client-side JavaScript
+│   └── images/                 # Static images
+│
+├── routes/
+│   ├── listing.js              # Listing CRUD & search routes
+│   ├── review.js               # Review creation & deletion routes
+│   └── user.js                 # Authentication routes
+│
+├── utils/
+│   ├── ExpressError.js         # Custom error class
+│   └── wrapAsync.js            # Async error wrapper
 │
 ├── views/
 │   ├── layout/
-│   │   └── boilerplate.ejs
-│   ├── listings/             # Listing pages
-│   ├── users/                # Signup & Login pages
-│   ├── partials/             # Navbar, footer, flash messages
-│   └── error.ejs
+│   │   └── boilerplate.ejs     # Main EJS-Mate layout
+│   │
+│   ├── listings/
+│   │   ├── index.ejs           # Listing index / homepage
+│   │   ├── show.ejs            # Listing details
+│   │   ├── create.ejs          # Create listing form
+│   │   └── edit.ejs            # Edit listing form
+│   │
+│   ├── partials/
+│   │   ├── navbar.ejs          # Navbar
+│   │   ├── footer.ejs          # Footer
+│   │   └── flash.ejs           # Flash messages
+│   │
+│   ├── users/
+│   │   ├── login.ejs           # Login page
+│   │   └── signup.ejs          # Signup page
+│   │
+│   └── error.ejs               # Global error page
 │
-├── utils/
-│   ├── ExpressError.js       # Custom error class
-│   └── wrapAsync.js          # Async error wrapper
-│
-├── public/                    # Static assets
-├── middleware.js              # Reusable application middleware
-├── schema.js                  # Joi validation schemas
-├── app.js                     # Application entry point
-├── .env                       # Environment variables
-└── package.json
+├── .env                        # Environment variables
+├── .gitignore                  # Git ignored files
+├── app.js                      # Main application entry point
+├── middleware.js               # Custom authentication/authorization middleware
+├── package.json                # Project configuration
+├── package-lock.json           # Dependency lockfile
+├── schema.js                   # Joi validation schemas
+└── README.md                   # Project documentation
 ```
 
 ---
 
-## 🔐 Authentication Flow
+## 🔄 Application Flow
 
-WanderLust uses **Passport.js** with `passport-local-mongoose` for username/password authentication.
+### Listing Flow
 
 ```text
-Signup
-   ↓
-Create User
-   ↓
-User.register()
-   ↓
-Password Hashing
-   ↓
-User Stored in MongoDB
-   ↓
-req.login()
-   ↓
+User
+ │
+ ▼
+Browse Listings
+ │
+ ├── Search ──────────────► MongoDB
+ │
+ └── Select Listing
+          │
+          ▼
+     Listing Details
+          │
+          ├── Owner Information
+          ├── Reviews
+          └── Review Authors
+```
+
+### Authentication Flow
+
+```text
+Signup / Login
+      │
+      ▼
+Passport.js
+      │
+      ▼
 Session Created
-   ↓
-Redirect to /listings
+      │
+      ▼
+HTTP-only Cookie
+      │
+      ▼
+Authenticated Requests
+      │
+      ├── Protected Listing Operations
+      └── Review Operations
 ```
 
-### Login
+### Authorization Flow
 
 ```text
-Login Form
-   ↓
-POST /login
-   ↓
-Passport Local Strategy
-   ↓
-Find User
-   ↓
-Verify Password
-   ↓
-Authentication Successful
-   ↓
-req.user + Session
-   ↓
-Redirect
+Request
+   │
+   ▼
+isLoggedIn
+   │
+   ▼
+isOwner / isAuthor
+   │
+   ├── Authorized ───► Continue
+   │
+   └── Unauthorized ─► Flash Message / Redirect
 ```
-
-### Protected Routes
-
-```text
-Protected Route
-      ↓
-isLoggedIn()
-      ↓
-req.isAuthenticated()
-   ↙             ↘
-FALSE            TRUE
-  ↓                ↓
-Save URL          next()
-  ↓
-Flash Error
-  ↓
-/login
-```
-
-After successful authentication, the user can be redirected to the originally requested URL.
 
 ---
 
-## 🚀 Getting Started
+## 🔗 Database Relationships
 
-### Prerequisites
+WanderLust uses MongoDB references to model relationships between users, listings, and reviews.
 
-* [Node.js](https://nodejs.org/) v18+
-* MongoDB running locally or a MongoDB connection string
-* npm
-
-### Installation
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/<your-username>/WanderLust.git
-cd WanderLust
+```text
+                ┌──────────────┐
+                │     User     │
+                └──────┬───────┘
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+       ┌──────────┐        ┌──────────┐
+       │ Listing  │        │  Review  │
+       └────┬─────┘        └──────────┘
+            │
+            │
+            ▼
+        Reviews[]
 ```
 
-2. **Install dependencies**
+### Relationships
 
-```bash
-npm install
+- **User → Listings**
+  - A user can own multiple listings.
+
+- **User → Reviews**
+  - A user can create multiple reviews.
+
+- **Listing → Reviews**
+  - A listing can contain multiple reviews.
+
+- **Review → Author**
+  - Each review references the user who created it.
+
+Mongoose `populate()` is used to retrieve related documents when required.
+
+---
+
+## 🔎 Search
+
+WanderLust includes a dedicated search route for finding listings by title.
+
+Search is performed using a **case-insensitive regular expression**, allowing users to search without matching the exact capitalization of a listing title.
+
+```text
+/search?q=bali
 ```
 
-3. **Configure environment variables**
+The search results are then rendered through the same listing interface.
 
-Create a `.env` file and add your required configuration.
+---
 
-4. **Start MongoDB**
+## 🧪 Validation
 
-Make sure your MongoDB server is running.
+Both listings and reviews are validated on the server using **Joi**.
 
-5. **Seed the database (optional)**
+### Listing Validation
+
+```text
+Request
+   │
+   ▼
+ListingSchema
+   │
+   ├── Valid ──────► Continue
+   │
+   └── Invalid ────► ExpressError(400)
+```
+
+### Review Validation
+
+```text
+Request
+   │
+   ▼
+ReviewSchema
+   │
+   ├── Valid ──────► Create Review
+   │
+   └── Invalid ────► ExpressError(400)
+```
+
+This prevents invalid request data from being directly stored in the database.
+
+---
+
+## 🚨 Error Handling
+
+WanderLust uses a centralized error-handling architecture.
+
+```text
+Route
+ │
+ ├── Synchronous Error
+ │
+ └── Async Error
+          │
+          ▼
+      wrapAsync
+          │
+          ▼
+    ExpressError
+          │
+          ▼
+ Global Error Middleware
+          │
+          ▼
+      error.ejs
+```
+
+This keeps route handlers clean while providing consistent error responses throughout the application.
+
+---
+
+## 💬 Flash Messages
+
+The application uses `connect-flash` for temporary success and error messages.
+
+Examples include:
+
+```text
+✓ New Listing Created!
+✓ Listing Updated!
+✓ Listing Deleted!
+✓ Review Posted!
+✓ Review Deleted!
+```
+
+These messages are displayed to the user after actions such as creating, updating, deleting listings, or posting reviews.
+
+---
+
+## 🔐 Authorization
+
+Authorization is implemented at the middleware level.
+
+### Listing Ownership
+
+Listing edit, update, and delete operations use ownership verification:
+
+```text
+Authenticated User
+        │
+        ▼
+     isOwner
+        │
+        ▼
+Compare User ID
+with Listing Owner ID
+        │
+   ┌────┴────┐
+   ▼         ▼
+Allowed    Denied
+```
+
+### Review Ownership
+
+Review deletion uses an author-checking middleware to ensure that users can only delete their own reviews.
+
+---
+
+## 🌱 Database Seeding
+
+Sample listing data can be inserted into MongoDB using the `init` directory.
 
 ```bash
 node init/index.js
 ```
 
-6. **Run the application**
+This provides a convenient way to populate the database with sample listings during development.
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/priyanshu-ben-projects/wanderLust.git
+cd wanderLust
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file:
+
+```env
+ATLASDB_URL=your_mongodb_connection_string
+SECRET=your_session_secret
+```
+
+Add any other environment variables required by your local configuration.
+
+### 4. Start the application
 
 ```bash
 node app.js
 ```
 
-Or with Nodemon:
+For development, you can also use:
 
 ```bash
-npx nodemon app.js
+nodemon app.js
 ```
 
-7. Open:
+---
+
+## 🎓 Learning Goals
+
+WanderLust is primarily a **learning-focused backend project**.
+
+The project is being developed incrementally to understand how different backend concepts work together in a real application.
+
+### Current Learning Path
 
 ```text
-http://localhost:3000
+Express
+   ↓
+CRUD
+   ↓
+MongoDB
+   ↓
+Mongoose
+   ↓
+Database Relationships
+   ↓
+Validation
+   ↓
+Error Handling
+   ↓
+Express Routers
+   ↓
+Sessions & Cookies
+   ↓
+Authentication
+   ↓
+Authorization
+   ↓
+Reviews
+   ↓
+Search
+   ↓
+Redis
+   ↓
+Cloud Storage
+   ↓
+Production Deployment
 ```
 
 ---
 
-## 🔗 Routes
+## 🚀 Future Improvements
 
-### General
+Planned improvements include:
 
-| Method | Route | Description              |
-| ------ | ----- | ------------------------ |
-| GET    | `/`   | Redirects to `/listings` |
-
-### Listings
-
-| Method | Route                        | Description               |
-| ------ | ---------------------------- | ------------------------- |
-| GET    | `/listings`                  | View all listings         |
-| GET    | `/listings/search?q=keyword` | Search listings by title  |
-| GET    | `/listings/create`           | Render create form        |
-| POST   | `/listings/create`           | Create a listing          |
-| GET    | `/listings/:id`              | Show listing with reviews |
-| GET    | `/listings/:id/edit`         | Render edit form          |
-| PUT    | `/listings/:id`              | Update a listing          |
-| DELETE | `/listings/:id`              | Delete a listing          |
-
-### Reviews
-
-| Method | Route                             | Description     |
-| ------ | --------------------------------- | --------------- |
-| POST   | `/listings/:id/reviews`           | Add a review    |
-| DELETE | `/listings/:id/reviews/:reviewId` | Delete a review |
-
-### Users
-
-| Method | Route     | Description              |
-| ------ | --------- | ------------------------ |
-| GET    | `/signup` | Render signup form       |
-| POST   | `/signup` | Register a new user      |
-| GET    | `/login`  | Render login form        |
-| POST   | `/login`  | Authenticate user        |
-| GET    | `/logout` | Log out the current user |
+- [ ] Redis caching
+- [ ] Redis-based session storage
+- [ ] Cloudinary image uploads
+- [ ] Production deployment
+- [ ] Advanced search and filtering
+- [ ] Improved listing discovery
+- [ ] Additional UI/UX improvements
+- [ ] Further backend performance optimization
 
 ---
 
-## 🧠 Key Learnings
+## 📌 Project Status
 
-Through WanderLust, I have been learning how individual backend concepts work together inside a real application.
+**WanderLust is an actively evolving learning project.**
 
-### Database
-
-* Designing Mongoose schemas
-* Creating references between collections
-* One-to-many relationships
-* Using `populate()`
-* Database seeding
-
-### Authentication
-
-* Creating a User model
-* Passport.js authentication
-* Local authentication strategy
-* Password hashing
-* `User.register()`
-* `req.login()`
-* `req.logout()`
-* `req.user`
-* `req.isAuthenticated()`
-
-### Sessions & Requests
-
-* Understanding `req.session`
-* Session-based authentication
-* Cookies and `httpOnly`
-* Preserving redirect URLs
-* Using `res.locals` to expose data to EJS
-
-### Error Handling
-
-* Custom error classes
-* Async error handling
-* Reusable `wrapAsync`
-* Centralized Express error middleware
-
-### Application Architecture
-
-* Modular Express routers
-* Nested routes
-* Reusable middleware
-* EJS layouts and partials
-* Separating models, routes, utilities, and views
+The focus is not simply on completing features, but on understanding the **backend engineering concepts behind them** and implementing those concepts into a progressively more realistic application.
 
 ---
 
-## 🗺️ Roadmap
-
-* [x] Listings CRUD
-* [x] Search by title
-* [x] Reviews
-* [x] MongoDB relationships
-* [x] Joi server-side validation
-* [x] Sessions & cookies
-* [x] Flash messages
-* [x] Centralized error handling
-* [x] User Model
-* [x] User Routes
-* [x] Signup
-* [x] Login / Logout
-* [x] Passport.js Authentication
-* [x] Password Hashing
-* [x] Protected Routes
-* [x] Login Redirect Handling
-* [ ] Authorization — Owner / Review Author permissions
-* [ ] Redis caching / session storage
-* [ ] Cascade delete for reviews
-* [ ] Cloudinary image uploads
-* [ ] Production deployment
-
----
-
-## 📦 Important NPM Packages
-
-```text
-express
-mongoose
-ejs
-ejs-mate
-joi
-express-session
-cookie-parser
-connect-flash
-passport
-passport-local
-passport-local-mongoose
-method-override
-dotenv
-```
-
----
-
-## 👤 Author
+## 👨‍💻 Developer
 
 **Priyanshu Ben**
 
-* GitHub: https://github.com/priyanshu-ben-projects
-* LinkedIn: https://www.linkedin.com/
+Built as part of my journey toward becoming a **Full Stack Developer**, with a strong focus on backend fundamentals, real-world architecture, and hands-on project development.
 
 ---
 
-<div align="center">
-
-⭐ If you found this project helpful, consider giving it a star!
+⭐ If you find the project useful or interesting, consider giving the repository a star!
 
 </div>
