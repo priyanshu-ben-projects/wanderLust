@@ -1,6 +1,7 @@
 <% layout('./layout/boilerplate') -%>
 
-    <form action="/listings/<%= e._id %>?_method=PUT" method="post" novalidate class="needs-validation container my-5">
+    <form action="/listings/<%= e._id %>?_method=PUT" enctype="multipart/form-data" method="post" novalidate
+        class="needs-validation container my-5">
 
         <div class="card shadow-sm border-0">
 
@@ -43,16 +44,15 @@
                 </div>
 
 
+                <img src="<%= e.image.url %>" alt="" srcset="" class="preview-img">
+
                 <!-- Image URL -->
                 <div class="mb-3">
-
-                    <label for="imageUrl" class="form-label fw-semibold">
-                        Image URL
+                    <label for="image" class="form-label fw-semibold">
+                        Upload Image
                     </label>
 
-                    <input type="url" id="imageUrl" name="listing[image][url]" value="<%= e.image?.url || '' %>"
-                        placeholder="https://example.com/image.jpg" class="form-control" required>
-
+                    <input type="file" id="image" name="listing[image]" class="form-control">
                 </div>
 
 

@@ -5,6 +5,10 @@ const ExpressError = require("../utils/ExpressError.js");
 const { isLoggedIn, isOwner } = require("../middleware.js")
 const listingController = require("../controllers/listings.js");
 const { ListingSchema } = require("../schema.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
+
 
 
 // Server Side Validation
@@ -29,11 +33,12 @@ router.get("/search", wrapAsync(listingController.searchListing));
 
 // Create Form Route
 router.route("/create").get(isLoggedIn, listingController.createForm)
-    .post(isLoggedIn, validateListing, wrapAsync(listingController.createListing));
+    .post(isLoggedIn, upload.single("listing[image]"), validateListing, wrapAsync(listingController.createListing))
+
 
 
 // Show (Read) Route
-router.route("/:id").get(wrapAsync(listingController.showListing)).put(isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing)).delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
+router.route("/:id").get(wrapAsync(listingController.showListing)).put(isLoggedIn, isOwner, upload.single("listing[image]"), validateListing, wrapAsync(listingController.updateListing)).delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
 
 
 // Edit (Render Form)

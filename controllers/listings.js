@@ -58,9 +58,14 @@ module.exports.createForm = (req, res) => {
 };
 
 module.exports.createListing = async (req, res) => {
+    let url = req.file.url;
+    let filename = req.file.originalname;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
+    newListing.image = { filename, url };
     await newListing.save();
+
+    console.log(newListing);
     req.flash("success", "New Listing Created!");
     res.redirect('/listings')
 };
@@ -88,11 +93,20 @@ module.exports.editForm = async (req, res) => {
 
 
 module.exports.updateListing = async (req, res) => {
+
     const { id } = req.params;
-    await Listing.findByIdAndUpdate(id, req.body.listing, {
+    const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
         new: true,
         runValidators: true
     });
+
+    if (typeof req.file !== "undefined") {
+        let url = req.file.url;
+        let filename = req.file.originalname;
+        listing.image = { url, filename };
+        await listing.save();
+    }
+
     req.flash("success", "Listing Updated!")
     return res.redirect(`/listings/${id}`)
 };
