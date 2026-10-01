@@ -12,6 +12,14 @@ module.exports.ListingSchema = joi.object({
             url: joi.string().allow("", null),
             filename: joi.string().allow("", null)
         },
+        geometry: joi.object({
+            type: joi.string()
+                .valid('Polygon')
+                .required(),
+            coordinates: joi.array()
+                .items(joi.number())
+                .required()
+        })
     }).required(),
 })
 

@@ -1,6 +1,7 @@
 <% layout('./layout/boilerplate') -%>
-
-
+    <script>
+        const mapToken = "<%= process.env.MAP_TOKEN %>";
+    </script>
     <div class="listing-show-page">
 
         <div class="listing-show-container">
@@ -234,6 +235,11 @@
 
                                 <% } %>
 
+                                    <!-- Map Section -->
+                                    <div class="map-section">
+                                        <h3>Where you'll be</h3>
+                                        <div id="map"></div>
+                                    </div>
 
                                     <% if (e.reviews && e.reviews.length> 0) { %>
                                         <div class="existing-reviews">
@@ -245,6 +251,7 @@
                                                     <%= e.reviews.length %> reviews
                                                 </span>
                                             </div>
+
 
                                             <!-- Reviews Grid -->
                                             <div class="reviews-grid">
@@ -319,3 +326,12 @@
         </div>
 
     </div>
+
+    <script>
+        let coordinates = "<%- JSON.stringify(e.geometry.coordinates) %>";
+        let setCenter = JSON.parse(coordinates)
+
+
+    </script>
+
+    <script src="/js/map.js"></script>
