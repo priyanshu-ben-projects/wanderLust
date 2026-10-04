@@ -9,13 +9,14 @@ const PORT = process.env.PORT || 3000;
 const path = require("path");
 const mongoose = require("mongoose");
 const engine = require('ejs-mate');
-const MONGO_URL = `mongodb://127.0.0.1:27017/major`;
+const ATLAS_URL = process.env.ATLAS_URL;
 const methodOverride = require("method-override");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js")
 const userRouter = require("./routes/user.js")
 const User = require("./models/user.js");
 const cookieParser = require("cookie-parser");
+const { MongoStore } = require("connect-mongo");
 const session = require("express-session");
 const flash = require("connect-flash")
 const localStrategy = require("passport-local")
@@ -38,7 +39,7 @@ main().then(() => {
 
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(ATLAS_URL);
 }
 
 // Index Route
@@ -47,16 +48,31 @@ app.get("/", (req, res) => {
 })
 
 
-// Session 
-app.use(session({
+const store = MongoStore.create({
+    mongoUrl: ATLAS_URL,
+    crypto: {
+        secret: "sushi"
+    }
+})
+
+store.on("error", (err) => {
+    console.log("ERROR IN MONGO SESSION STORE", err)
+})
+
+const sessionData = {
+    store,
     secret: 'sushi',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
     }
-}));
+};
+
+
+// Session 
+app.use(session(sessionData));
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -84,15 +100,6 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     next();
 })
-
-// app.get("/registerUser", async (req, res) => {
-//     let fakeUser = new user({
-//         email: "priyanshuben42@gmail.com",
-//         username: "priyanshuben42"
-//     });
-//     let newUser = await user.register(fakeUser, "xyz");
-//     res.send(newUser);
-// })
 
 
 app.get("/getCookies", (req, res) => {

@@ -17,7 +17,7 @@ const heroData = {
     },
     primaryCtaText: "Start Exploring",
     primaryCtaUrl: "#search-bar",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    videoUrl: "https://www.youtube.com/embed/Z9ztC0KalOw?si=egqxJUXakijurSVR",
     stats: [
         { value: "500+", label: "Destinations" },
         { value: "12k+", label: "Happy Travelers" },
@@ -31,9 +31,18 @@ const heroData = {
     searchActionUrl: "/search"
 };
 
+
 module.exports.index = async (req, res) => {
-    const showAll = await Listing.find({}).populate("owner");
-    res.render("listings/index.ejs", { showAll, heroData })
+    const { category } = req.query;
+    const filter = {};
+
+    if (typeof category === "string" && category) {
+        filter.category = category;
+    }
+
+    const showAll = await Listing.find(filter).populate("owner");
+
+    res.render("listings/index.ejs", { showAll, heroData, activeCategory: category || "" })
 
 };
 
@@ -77,7 +86,6 @@ module.exports.createListing = async (req, res) => {
     newListing.owner = req.user._id;
     newListing.image = { filename, url };
     newListing.geometry = response.body.features[0].geometry;
-    console.log(response.body.features[0].geometry);
 
     const savedListing = await newListing.save();
 
@@ -110,18 +118,22 @@ module.exports.editForm = async (req, res) => {
 module.exports.updateListing = async (req, res) => {
 
     const { id } = req.params;
-    const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
+
+    let listingData = { ...req.body.listing }
+    delete listingData.image;
+
+    const listing = await Listing.findByIdAndUpdate(id, listingData, {
         new: true,
         runValidators: true
     });
 
+    // Update image only if Uploaded.
     if (typeof req.file !== "undefined") {
         let url = req.file.url;
         let filename = req.file.originalname;
         listing.image = { url, filename };
         await listing.save();
     }
-
     req.flash("success", "Listing Updated!")
     return res.redirect(`/listings/${id}`)
 };

@@ -1,6 +1,5 @@
 <% layout('./layout/boilerplate') -%>
     <%- include('../partials/hero.ejs') %>
-
         <div class="listings-grid">
             <% if (typeof showAll !=='undefined' && showAll.length> 0) { %>
 
@@ -48,6 +47,11 @@
 
                                             <span class="card-location">
                                                 <%= e.location %>, <%= e.country %>
+                                            </span>
+                                            <span class="card-category">
+                                                <b>
+                                                    <%= e.category %>
+                                                </b>
                                             </span>
 
                                         </div>

@@ -145,7 +145,8 @@
 }
 
 
-.card-location {
+.card-location,
+.card-category {
     color: #777777;
 
     font-size: 13px;

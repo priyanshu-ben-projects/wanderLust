@@ -1,0 +1,149 @@
+<nav class="category-bar border-bottom bg-white sticky-top" aria-label="Category filter">
+    <div class="container-fluid px-3 px-md-4">
+
+        <!-- Change action="/listings" if your route is different -->
+        <form action="/listings" method="GET" class="m-0">
+            <div class="category-list d-flex flex-nowrap">
+
+                <button type="submit" formaction="/listings" class="category-item" data-category="">
+                    <i class="fa-solid fa-border-all"></i><span>All</span>
+                </button>
+
+                <button type="submit" name="category" value="trending" class="category-item" data-category="trending">
+                    <i class="fa-solid fa-fire"></i><span>Trending</span>
+                </button>
+
+                <button type="submit" name="category" value="rooms" class="category-item" data-category="rooms">
+                    <i class="fa-solid fa-bed"></i><span>Rooms</span>
+                </button>
+
+                <button type="submit" name="category" value="cities" class="category-item" data-category="cities">
+                    <i class="fa-solid fa-city"></i><span>Cities</span>
+                </button>
+
+                <button type="submit" name="category" value="mountains" class="category-item" data-category="mountains">
+                    <i class="fa-solid fa-mountain"></i><span>Mountains</span>
+                </button>
+
+                <button type="submit" name="category" value="castles" class="category-item" data-category="castles">
+                    <i class="fa-solid fa-chess-rook"></i><span>Castles</span>
+                </button>
+
+                <button type="submit" name="category" value="pools" class="category-item" data-category="pools">
+                    <i class="fa-solid fa-person-swimming"></i><span>Pools</span>
+                </button>
+
+                <button type="submit" name="category" value="camping" class="category-item" data-category="camping">
+                    <i class="fa-solid fa-campground"></i><span>Camping</span>
+                </button>
+
+                <button type="submit" name="category" value="farms" class="category-item" data-category="farms">
+                    <i class="fa-solid fa-cow"></i><span>Farms</span>
+                </button>
+
+                <button type="submit" name="category" value="arctic" class="category-item" data-category="arctic">
+                    <i class="fa-solid fa-snowflake"></i><span>Arctic</span>
+                </button>
+
+                <button type="submit" name="category" value="boats" class="category-item" data-category="boats">
+                    <i class="fa-solid fa-sailboat"></i><span>Boats</span>
+                </button>
+
+
+            </div>
+        </form>
+    </div>
+</nav>
+
+<style>
+    .category-bar {
+        z-index: 1020;
+    }
+
+    .category-list {
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .category-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .35rem;
+        padding: .75rem .25rem;
+        min-width: 64px;
+        background: none;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        color: #717171;
+        font-size: .8rem;
+        white-space: nowrap;
+        opacity: .75;
+        cursor: pointer;
+        scroll-snap-align: start;
+        transition: opacity .2s, color .2s, border-color .2s;
+    }
+
+    .category-item i {
+        font-size: 1.35rem;
+    }
+
+    .category-item:hover,
+    .category-item.active {
+        opacity: 1;
+        color: #222;
+    }
+
+    .category-item:hover {
+        border-bottom-color: #ddd;
+    }
+
+    .category-item.active {
+        border-bottom-color: #222;
+    }
+
+    @media (min-width: 768px) {
+        .category-list {
+            gap: 2.25rem;
+        }
+
+        .category-item {
+            font-size: .875rem;
+            min-width: 72px;
+        }
+
+        .category-item i {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .category-list {
+            gap: 1rem;
+        }
+
+        .category-item {
+            min-width: 56px;
+            font-size: .75rem;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        var current = new URLSearchParams(window.location.search).get('category') || '';
+        document.querySelectorAll('.category-item').forEach(function (el) {
+            if (el.dataset.category === current) {
+                el.classList.add('active');
+                el.scrollIntoView({ inline: 'center', block: 'nearest' });
+            }
+        });
+    })();
+</script>

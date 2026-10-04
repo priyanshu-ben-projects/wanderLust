@@ -90,66 +90,76 @@
 
                 </div>
 
+                <div class="mb-3">
+                    <label for="category" class="form-label fw-bold">Category</label>
+                    <select name="listing[category]" id="category" class="form-select shadow-sm" required>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="rooms">Rooms</option>
+                        <option value="farms">Farms</option>
+                        <option value="arctic">Arctic</option>
+                        <option value="domes">Domes</option>
+                        <option value="boats">Boats</option>
+                    </select>
 
-                <!-- Location & Country -->
-                <div class="row">
+                    <!-- Location & Country -->
+                    <div class="row">
 
-                    <!-- Location -->
-                    <div class="col-md-6 mb-3">
+                        <!-- Location -->
+                        <div class="col-md-6 mb-3">
 
-                        <label for="location" class="form-label fw-semibold">
-                            City / Location
-                        </label>
+                            <label for="location" class="form-label fw-semibold">
+                                City / Location
+                            </label>
 
-                        <input type="text" id="location" name="listing[location]" value="<%= e.location %>"
-                            placeholder="e.g., Manali" class="form-control" required>
+                            <input type="text" id="location" name="listing[location]" value="<%= e.location %>"
+                                placeholder="e.g., Manali" class="form-control" required>
+
+                        </div>
+
+
+                        <!-- Country -->
+                        <div class="col-md-6 mb-3">
+
+                            <label for="country" class="form-label fw-semibold">
+                                Country
+                            </label>
+
+                            <input type="text" id="country" name="listing[country]" value="<%= e.country %>"
+                                placeholder="e.g., India" class="form-control" required>
+
+                        </div>
 
                     </div>
 
 
-                    <!-- Country -->
-                    <div class="col-md-6 mb-3">
+                    <!-- Rating -->
+                    <div class="mb-4">
 
-                        <label for="country" class="form-label fw-semibold">
-                            Country
+                        <label for="rating" class="form-label fw-semibold">
+                            Rating (1-5)
                         </label>
 
-                        <input type="text" id="country" name="listing[country]" value="<%= e.country %>"
-                            placeholder="e.g., India" class="form-control" required>
+                        <input type="number" id="rating" name="listing[rating]" min="1" max="5" step="0.1"
+                            value="<%= e.rating || '' %>" placeholder="5" class="form-control" required>
 
                     </div>
 
-                </div>
 
+                    <!-- Actions -->
+                    <div class="d-flex gap-2">
 
-                <!-- Rating -->
-                <div class="mb-4">
+                        <button type="submit" class="btn btn-dark px-4">
+                            Update Listing
+                        </button>
 
-                    <label for="rating" class="form-label fw-semibold">
-                        Rating (1-5)
-                    </label>
+                        <a href="/listings/<%= e._id %>" class="btn btn-outline-secondary px-4">
+                            Cancel
+                        </a>
 
-                    <input type="number" id="rating" name="listing[rating]" min="1" max="5" step="0.1"
-                        value="<%= e.rating || '' %>" placeholder="5" class="form-control" required>
-
-                </div>
-
-
-                <!-- Actions -->
-                <div class="d-flex gap-2">
-
-                    <button type="submit" class="btn btn-dark px-4">
-                        Update Listing
-                    </button>
-
-                    <a href="/listings/<%= e._id %>" class="btn btn-outline-secondary px-4">
-                        Cancel
-                    </a>
+                    </div>
 
                 </div>
 
             </div>
-
-        </div>
 
     </form>

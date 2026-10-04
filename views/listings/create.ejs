@@ -57,7 +57,18 @@
                     </div>
                 </div>
 
-
+                <div class="mb-3">
+                    <label for="category" class="form-label fw-bold">Category</label>
+                    <select name="listing[category]" id="category" class="form-select shadow-sm" required>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="rooms">Rooms</option>
+                        <option value="farms">Farms</option>
+                        <option value="arctic">Arctic</option>
+                        <option value="domes">Domes</option>
+                        <option value="boats">Boats</option>
+                    </select>
+                    <div class="invalid-feedback">Please choose a category.</div>
+                </div>
                 <!-- Location & Country -->
                 <div class="row">
 

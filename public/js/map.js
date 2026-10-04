@@ -1,18 +1,32 @@
 console.log(setCenter)
 mapboxgl.accessToken = mapToken;
 
-
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/standard', // Use the standard style for the map
-    zoom: 16, // initial zoom level, 0 is the world view, higher values zoom in
-    center: setCenter// center the map on this longitude and latitude
+    style: 'mapbox://styles/mapbox/standard',
+    zoom: 16,
+    center: setCenter
 });
+
+const popup = new mapboxgl.Popup({ offset: 25 })
+    .setHTML("<h4>Most welcome!</h4>")
+    .setMaxWidth("300px");
+
+const marker = new mapboxgl.Marker({
+    color: '#FF4D4D',
+    scale: 1.2,
+    draggable: true,
+    anchor: 'bottom',
+    rotation: 0
+})
+    .setLngLat(setCenter)
+    .setPopup(popup)
+    .addTo(map);
 
 
 map.addControl(new mapboxgl.NavigationControl());
-map.scrollZoom.disable();
+
 
 map.on('style.load', () => {
-    map.setFog({}); // Set the default atmosphere style
+    map.setFog({});
 });
