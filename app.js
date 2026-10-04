@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 const store = MongoStore.create({
     mongoUrl: ATLAS_URL,
     crypto: {
-        secret: "sushi"
+        secret: process.env.SECRET
     }
 })
 
@@ -61,7 +61,7 @@ store.on("error", (err) => {
 
 const sessionData = {
     store,
-    secret: 'sushi',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
