@@ -4,6 +4,8 @@
 
 **A full-stack travel listing platform built to learn and practice real-world backend engineering.**
 
+### 🔗 [Live Demo → wanderlust-kldo.onrender.com](https://wanderlust-kldo.onrender.com/listings)
+
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
@@ -11,6 +13,10 @@
 ![EJS](https://img.shields.io/badge/EJS-B4CA65?style=for-the-badge&logo=ejs&logoColor=black)
 ![Joi](https://img.shields.io/badge/Joi-0080FF?style=for-the-badge)
 ![Passport.js](https://img.shields.io/badge/Passport.js-34E27A?style=for-the-badge&logo=passport&logoColor=black)
+![MongoDB Atlas](https://img.shields.io/badge/MongoDB%20Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
+![Mapbox](https://img.shields.io/badge/Mapbox-000000?style=for-the-badge&logo=mapbox&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
 
 </div>
 
@@ -18,7 +24,7 @@
 
 ## 📖 About The Project
 
-**WanderLust** is an Airbnb-inspired travel-stay listing platform where users can discover properties, search listings, create and manage listings, authenticate securely, and leave reviews.
+**WanderLust** is an Airbnb-inspired travel-stay listing platform where users can discover properties, search and filter listings by category, view them on an interactive map, upload listing images, create and manage listings, authenticate securely, and leave reviews.
 
 The primary purpose of this project is **learning backend engineering by building a real-world full-stack application**.
 
@@ -41,7 +47,28 @@ The project currently covers:
 - Modular Express architecture
 - EJS layouts and partials
 - Search functionality
+- Category-based filtering
+- Third-party API integration (Mapbox & Cloudinary)
+- Geocoding and interactive maps
+- Cloud image uploads
+- Cloud database hosting with MongoDB Atlas
 - Database seeding
+
+---
+
+## 📸 Screenshots
+
+### Home — Category Filters & Search
+
+![Home page](screenshots/home.png)
+
+### Listing Details — Mapbox Map
+
+![Listing details with map](screenshots/listing-map.png)
+
+### Signup
+
+![Signup page](screenshots/signup.png)
 
 ---
 
@@ -56,6 +83,25 @@ The project currently covers:
 - **Ownership Authorization** — Only listing owners can edit or delete their listings
 - **Listing Details** — Display listing information along with reviews and owner information
 - **Search** — Case-insensitive search based on listing titles
+- **Category Filters** — Filter listings by 10 categories (trending, rooms, cities, mountains, pools, castles, camping, farms, arctic, boats) through a filter bar (`/listings?category=...`)
+- **Price & Rating** — Each listing has a price and a 1–5 rating (defaults to 4.5)
+- **Default Image** — Listings without an uploaded image fall back to a default image
+- **Image Uploads** — Listing images are uploaded to Cloudinary instead of being stored locally
+
+#### 🗺️ Maps & Geocoding
+
+- **Geocoding** — Listing locations are converted into coordinates using the Mapbox **Geocoding Client**
+- **Interactive Maps** — Each listing page displays a Mapbox GL JS map centered on the listing's location
+- **Location Marker & Popup** — A custom-colored marker with a popup marks the listing's position
+- **Map Controls** — Navigation controls (zoom/rotate) and atmospheric fog effect on the `standard` Mapbox style
+
+#### ☁️ Cloud Services
+
+- **Cloudinary Image Storage** — Uploads handled through `multer` + `multer-storage-cloudinary`, restricted to `png`, `jpg`, and `jpeg`
+- **Organized Media** — Images are stored in a dedicated Cloudinary folder (`wanderLust_DEV`)
+- **MongoDB Atlas** — The database is hosted in the cloud instead of locally
+- **Persistent Sessions** — Sessions are stored in MongoDB Atlas using `connect-mongo`, with encrypted session data
+- **Deployment** — The application is deployed on **Render**
 
 #### ⭐ Reviews
 
@@ -93,10 +139,11 @@ The project currently covers:
 - **Responsive Interface**
 - **Travel Hero Section** — Featured travel content, CTA, statistics, and visual background
 - **Search Interface** — Dedicated listing search functionality
+- **Category Filter Bar** — Reusable partial for browsing listings by category
 
 #### 🌱 Database
 
-- **MongoDB Database**
+- **MongoDB Database** hosted on **MongoDB Atlas**
 - **Mongoose ODM**
 - **Database Relationships**
 - **`populate()` for referenced documents**
@@ -106,10 +153,9 @@ The project currently covers:
 
 ## 🚧 In Progress
 
-- ⚡ **Redis** — Caching and session storage
-- ☁️ **Cloud Image Uploads** — Cloudinary integration
-- 🚀 **Production Deployment** — Final production configuration
-- 🔍 **Further Search Improvements**
+- ⚡ **Redis** — Caching
+- 🚀 **Production Hardening** — Further production configuration (the app is already live on Render)
+- 🔍 **Further Search Improvements** — Combining search with category filters
 - 🎨 **UI/UX Improvements**
 
 ---
@@ -136,6 +182,12 @@ The project currently covers:
 | **Flash Messages**         | `connect-flash` with view locals                                        |
 | **Error Handling**         | `ExpressError` + `wrapAsync` + centralized middleware                   |
 | **Search**                 | MongoDB regex-based case-insensitive title search                       |
+| **Filtering**              | Query-string based category filtering (`?category=`)                    |
+| **File Uploads**           | `multer` with Cloudinary storage                                        |
+| **Third-party APIs**       | Mapbox Geocoding & Mapbox GL JS, Cloudinary                             |
+| **Geocoding**              | Converting location text into coordinates with the Geocoding Client     |
+| **Cloud Database**         | MongoDB Atlas connection and hosted session store                       |
+| **Environment Config**     | `dotenv` in development, environment variables in production            |
 | **Templating**             | EJS + EJS-Mate                                                          |
 | **Reusable Views**         | Layouts and partials                                                    |
 | **Database Seeding**       | Sample data through `init` scripts                                      |
@@ -150,6 +202,7 @@ The project currently covers:
 | **Runtime**                 | Node.js                 |
 | **Framework**               | Express.js              |
 | **Database**                | MongoDB                 |
+| **Database Hosting**        | MongoDB Atlas           |
 | **ODM**                     | Mongoose                |
 | **Authentication**          | Passport.js             |
 | **Password Authentication** | passport-local-mongoose |
@@ -157,72 +210,19 @@ The project currently covers:
 | **Template Layouts**        | ejs-mate                |
 | **Validation**              | Joi                     |
 | **Sessions**                | express-session         |
+| **Session Store**           | connect-mongo           |
 | **Cookies**                 | cookie-parser           |
 | **Flash Messages**          | connect-flash           |
 | **HTTP Method Support**     | method-override         |
+| **File Uploads**            | multer                  |
+| **Image Storage**           | Cloudinary, multer-storage-cloudinary |
+| **Maps**                    | Mapbox GL JS            |
+| **Icons**                   | Bootstrap Icons, Material Icons |
+| **Deployment**              | Render                  |
+| **Geocoding**               | Mapbox Geocoding Client (`@mapbox/mapbox-sdk`) |
+| **Environment Variables**   | dotenv                  |
 | **Async Error Handling**    | wrapAsync               |
 | **Custom Errors**           | ExpressError            |
-
----
-
-## 📂 Project Structure
-
-```bash
-WanderLust/
-│
-├── init/
-│   ├── data.js                 # Sample listing dataset
-│   └── index.js                # Database seeding script
-│
-├── models/
-│   ├── listing.js              # Listing schema & model
-│   ├── review.js               # Review schema & model
-│   └── user.js                 # User schema & model
-│
-├── public/
-│   ├── css/                    # Custom stylesheets
-│   ├── js/                     # Client-side JavaScript
-│   └── images/                 # Static images
-│
-├── routes/
-│   ├── listing.js              # Listing CRUD & search routes
-│   ├── review.js               # Review creation & deletion routes
-│   └── user.js                 # Authentication routes
-│
-├── utils/
-│   ├── ExpressError.js         # Custom error class
-│   └── wrapAsync.js            # Async error wrapper
-│
-├── views/
-│   ├── layout/
-│   │   └── boilerplate.ejs     # Main EJS-Mate layout
-│   │
-│   ├── listings/
-│   │   ├── index.ejs           # Listing index / homepage
-│   │   ├── show.ejs            # Listing details
-│   │   ├── create.ejs          # Create listing form
-│   │   └── edit.ejs            # Edit listing form
-│   │
-│   ├── partials/
-│   │   ├── navbar.ejs          # Navbar
-│   │   ├── footer.ejs          # Footer
-│   │   └── flash.ejs           # Flash messages
-│   │
-│   ├── users/
-│   │   ├── login.ejs           # Login page
-│   │   └── signup.ejs          # Signup page
-│   │
-│   └── error.ejs               # Global error page
-│
-├── .env                        # Environment variables
-├── .gitignore                  # Git ignored files
-├── app.js                      # Main application entry point
-├── middleware.js               # Custom authentication/authorization middleware
-├── package.json                # Project configuration
-├── package-lock.json           # Dependency lockfile
-├── schema.js                   # Joi validation schemas
-└── README.md                   # Project documentation
-```
 
 ---
 
@@ -236,7 +236,9 @@ User
  ▼
 Browse Listings
  │
- ├── Search ──────────────► MongoDB
+ ├── Search ──────────────► MongoDB Atlas
+ │
+ ├── Category Filter ─────► MongoDB Atlas
  │
  └── Select Listing
           │
@@ -244,8 +246,28 @@ Browse Listings
      Listing Details
           │
           ├── Owner Information
+          ├── Images (Cloudinary)
+          ├── Map (Mapbox)
           ├── Reviews
           └── Review Authors
+```
+
+### Create Listing Flow
+
+```text
+Listing Form (with image)
+        │
+        ▼
+ multer + Cloudinary ───► Image URL & filename
+        │
+        ▼
+ Geocoding Client ──────► Coordinates
+        │
+        ▼
+ Joi Validation
+        │
+        ▼
+ Save to MongoDB Atlas
 ```
 
 ### Authentication Flow
@@ -284,6 +306,24 @@ isOwner / isAuthor
    │
    └── Unauthorized ─► Flash Message / Redirect
 ```
+
+---
+
+## 🧱 Listing Data Model
+
+| Field         | Type                  | Notes                                              |
+| ------------- | --------------------- | -------------------------------------------------- |
+| `title`       | String                | Required                                           |
+| `description` | String                | Required                                           |
+| `image`       | `{ url, filename }`   | Cloudinary image; falls back to a default image    |
+| `price`       | Number                | Required, minimum 0 (Joi)                          |
+| `location`    | String                | Required, used for geocoding                       |
+| `country`     | String                | Required                                           |
+| `category`    | String (enum)         | One of the 10 supported categories                 |
+| `geometry`    | GeoJSON `Point`       | `[longitude, latitude]` from the Geocoding Client  |
+| `rating`      | Number                | 1–5, defaults to 4.5                               |
+| `reviews`     | `[ObjectId]`          | References to `Review`                             |
+| `owner`       | ObjectId              | Reference to `User`                                |
 
 ---
 
@@ -339,6 +379,107 @@ The search results are then rendered through the same listing interface.
 
 ---
 
+## 🏷️ Category Filters
+
+Listings can be filtered by category using a reusable filter bar partial.
+
+Each filter sends a `GET` request with the selected category as a query parameter:
+
+```text
+/listings?category=<category-name>
+```
+
+The listing route reads the query string and returns only the listings that match the selected category.
+
+### Available categories
+
+| Category | | Category | |
+| -------- | - | -------- | - |
+| `trending` | | `camping` | |
+| `rooms` | | `farms` | |
+| `cities` | | `arctic` | |
+| `mountains` | | `boats` | |
+| `pools` | | `castles` | |
+
+Categories are enforced in both the Mongoose schema (`enum`) and the Joi validation schema, so only these values can be saved.
+
+---
+
+## 🗺️ Maps & Geocoding
+
+WanderLust uses **Mapbox** to show where each listing is located.
+
+### How it works
+
+```text
+Listing Location (text)
+        │
+        ▼
+Mapbox Geocoding Client ──► [longitude, latitude]
+        │
+        ▼
+Stored with the Listing
+        │
+        ▼
+Mapbox GL JS (client-side) ──► Interactive Map
+```
+
+1. When a listing is created, the location text is passed to the **Geocoding Client**, which returns coordinates.
+2. The coordinates are saved with the listing.
+3. On the listing page (`show.ejs`), the coordinates are extracted from the listing's `geometry` and stored in a `setCenter` variable, along with the Mapbox access token.
+4. The client script (`map.js`) uses `setCenter` to center the map and place the marker.
+5. **Mapbox GL JS** renders the map with a marker and popup.
+
+Coordinates are stored as a GeoJSON `Point` in the listing's `geometry` field.
+
+### Map features
+
+- Mapbox `standard` style
+- Map centered on the listing coordinates (zoom level 16)
+- Custom-colored, draggable marker with a welcome popup
+- Navigation controls
+- Fog / atmosphere effect
+
+---
+
+## ☁️ Image Uploads (Cloudinary)
+
+Listing images are uploaded to **Cloudinary** rather than stored on the server.
+
+```text
+Form (multipart/form-data)
+        │
+        ▼
+      multer
+        │
+        ▼
+multer-storage-cloudinary
+        │
+        ▼
+Cloudinary (folder: wanderLust_DEV)
+        │
+        ▼
+Image URL & filename saved in MongoDB
+```
+
+- Allowed formats: `png`, `jpg`, `jpeg`
+- Cloudinary credentials are loaded from environment variables
+- If no image is uploaded, the listing uses a default image URL
+- The configuration lives in `cloudConfig.js`
+
+---
+
+## 🗄️ Database Hosting (MongoDB Atlas)
+
+The database runs on **MongoDB Atlas**, MongoDB's cloud service.
+
+- Mongoose connects using the `ATLAS_URL` connection string
+- Sessions are stored in Atlas through `connect-mongo`, with the session data encrypted using the app secret
+- Session cookies expire after 7 days and are `httpOnly`
+- Session store errors are logged for easier debugging
+
+---
+
 ## 🧪 Validation
 
 Both listings and reviews are validated on the server using **Joi**.
@@ -368,6 +509,8 @@ ReviewSchema
    │
    └── Invalid ────► ExpressError(400)
 ```
+
+Listing validation covers required text fields, a category restricted to the supported values, a non-negative price, a 1–5 rating, and the optional image and geometry fields. Review validation requires a comment and a 1–5 rating.
 
 This prevents invalid request data from being directly stored in the database.
 
@@ -480,11 +623,22 @@ npm install
 Create a `.env` file:
 
 ```env
-ATLASDB_URL=your_mongodb_connection_string
+# MongoDB Atlas
+ATLAS_URL=your_mongodb_atlas_connection_string
+
+# Sessions
 SECRET=your_session_secret
+
+# Cloudinary
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+
+# Mapbox
+MAP_TOKEN=your_mapbox_access_token
 ```
 
-Add any other environment variables required by your local configuration.
+> `dotenv` loads this file automatically when `NODE_ENV` is not `production`. In production, set these variables on your hosting platform instead.
 
 ### 4. Start the application
 
@@ -533,11 +687,15 @@ Authorization
    ↓
 Reviews
    ↓
-Search
+Search & Category Filters
+   ↓
+Cloud Storage (Cloudinary)
+   ↓
+Maps & Geocoding (Mapbox)
+   ↓
+Cloud Database (MongoDB Atlas)
    ↓
 Redis
-   ↓
-Cloud Storage
    ↓
 Production Deployment
 ```
@@ -548,11 +706,14 @@ Production Deployment
 
 Planned improvements include:
 
+- [x] Category filters
+- [x] Cloudinary image uploads
+- [x] Maps using Mapbox and the Geocoding Client
+- [x] MongoDB Atlas database hosting
 - [ ] Redis caching
-- [ ] Redis-based session storage
-- [ ] Cloudinary image uploads
-- [ ] Production deployment
-- [ ] Advanced search and filtering
+- [x] Deployment on Render
+- [ ] Production hardening
+- [ ] Combined search and category filtering
 - [ ] Improved listing discovery
 - [ ] Additional UI/UX improvements
 - [ ] Further backend performance optimization
