@@ -1,4 +1,3 @@
-console.log(setCenter)
 mapboxgl.accessToken = mapToken;
 
 const map = new mapboxgl.Map({
